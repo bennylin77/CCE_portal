@@ -1,0 +1,29 @@
+<%= form_for(@dimension) do |f| %>
+  <% if @dimension.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dimension.errors.count, "error") %> prohibited this dimension from being saved:</h2>
+
+      <ul>
+      <% @dimension.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <section class="form_table">  
+  <div class="form_row">
+	  <div class="form_title">
+	  名稱
+	  </div>
+	  <div class="form_content">
+      <%= f.text_field :name, size: 30 %>
+	  </div>         	
+  </div>
+  <div class="form_row">
+  	<div class="form_title">
+    <%= f.button '確認送出' %>
+    </div>
+  </div>    
+  </section>
+<% end %>

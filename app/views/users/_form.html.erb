@@ -1,0 +1,185 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :verified %>
+  
+  
+  <section class="form_table">  
+  <%if params[:action]=='new' or params[:action]=='create'%>
+  <div class="form_row">
+	  <div class="form_title">
+	   姓名*
+	  </div>
+	  <div class="form_content">
+      <%= f.text_field :name, size: 30 %>
+	  </div>         	
+  </div>
+  <div class="form_row">
+	  <div class="form_title">
+	   Email*
+	  </div>
+	  <div class="form_content">
+      <%= f.text_field :email, size: 30 %>
+	  </div>         	
+  </div>  
+  <div class="form_row">
+	  <div class="form_title">
+	   會員身份*
+	  </div>
+	  <div class="form_content">
+   	  <%= f.select :identity, identityOptions, {prompt: '選擇身份'}%> 
+	  </div>         	
+  </div>   
+  <%else%>
+  <div class="form_row">
+	  <div class="form_title">
+	   姓名
+	  </div>
+	  <div class="form_content">
+   	  <%= @user.name %> 
+	  </div>         	
+  </div>
+  <div class="form_row">
+	  <div class="form_title">
+	   Email
+	  </div>
+	  <div class="form_content">
+   	  <%= @user.email %>
+	  </div>         	
+  </div>  
+  <div class="form_row">
+	  <div class="form_title">
+	   會員身份
+	  </div>
+	  <div class="form_content">
+   	  <%= Hash[identityOptions].rassoc(@user.identity).first%> 
+	  </div>         	
+  </div>  
+  <div class="form_row">
+	  <div class="form_title">
+	   密碼*
+	  </div>
+	  <div class="form_content">
+   	  <%=f.password_field :pw, size: 30 %> 
+	  </div>         	
+  </div>     
+  <div class="form_row">
+	  <div class="form_title">
+	   密碼確認*
+	  </div>
+	  <div class="form_content">
+   	  <%=f.password_field :pw_confirmation, size: 30 %>
+	  </div>         	
+  </div>    
+  <div class="form_row">
+	  <div class="form_title">
+	  性別*
+	  </div>
+	  <div class="form_content">
+	  <%=f.radio_button :gender, "true"%>男
+	  <%=f.radio_button :gender, "false"%>女
+	  </div>         	
+  </div> 
+  <div class="form_row">
+	  <div class="form_title">
+	  出生年月日*
+	  </div>
+	  <div class="form_content">
+      <%= f.date_select :birthday, start_year: Time.now.year - 80, end_year: Time.now.year %>
+	  </div>         	
+  </div>        
+  <div class="form_row">
+	  <div class="form_title">
+	  地址*
+	  </div>
+	  <div class="form_content">
+   	  <%= f.text_field :address, size: 30 %>
+	  </div>         	
+  </div>
+  <%if @user.identity!=GLOBAL_VAR['identity_student'] and @user.identity!=GLOBAL_VAR['identity_lecturer']%>
+  <div class="form_row">
+	  <div class="form_title">
+	   學校分機*
+	  </div>
+	  <div class="form_content">
+   	  <%= f.number_field :extend, in: 0..100000, step: 1  %>
+	  </div>         	
+  </div>     
+  <%end%>  
+  <div class="form_row">
+	  <div class="form_title">
+	  電話號碼
+	  </div>
+	  <div class="form_content">
+   	  <%= f.text_field :phone_no, size: 30  %>
+	  </div>         	
+  </div>  
+  <div class="form_row">
+	  <div class="form_title">
+	  手機號碼*
+	  </div>
+	  <div class="form_content">
+   	  <%= f.text_field :mobile_no, size: 30  %>
+	  </div>         	
+  </div>  
+  <div class="form_row">
+	  <div class="form_title">
+	  國籍*
+	  </div>
+	  <div class="form_content">
+      <%= country_select("user", "nationality", {}, { selected: "Taiwan, Republic Of China"})%>
+	  </div>         	
+  </div>
+  <div class="form_row">
+	  <div class="form_title">
+	  身分証字號*
+	  </div>
+	  <div class="form_content">
+   	  <%= f.text_field :id_no, size: 30 %>
+	  </div> 
+	  <div class="form_title">
+	  或
+	  </div>
+	  <div class="form_content">
+	  </div>   	  	  
+	  <div class="form_title">
+	  護照號碼*
+	  </div>
+	  <div class="form_content">
+   	  <%= f.text_field :passport_no, size: 30  %>
+	  </div>       	          	
+  </div>
+  <div class="form_row">
+	  <div class="form_title">
+	  最高學歷*
+	  </div>
+	  <div class="form_content">
+   	  <%= f.text_field :education, size: 30 %>
+	  </div>         	
+  </div>  
+  <div class="form_row">
+	  <div class="form_title">
+	  訂閱最新課程資訊
+	  </div>
+	  <div class="form_content">
+	  <%=f.radio_button :edm, "true"%>訂閱
+	  <%=f.radio_button :edm, "false"%>取消
+	  </div>         	
+  </div>   
+  <%end%>
+  <div class="form_row">
+  	<div class="form_title">
+    <%= f.button '確認送出' %>
+    </div>
+  </div>   
+  </section>	  
+<% end %>

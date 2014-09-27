@@ -1,0 +1,79 @@
+<div class="news_show">
+	<div class="news_show_logo">
+	  <div class="news_show_logo_en">
+	  	NEWS
+	  </div>	
+	  <div class="news_show_logo_ch">
+	  	消息公告
+	  </div>		  
+	</div>	
+	<div class="news_show_title">
+	  <%= @news.title %>
+	</div>
+	<div class="news_show_content">
+		<div class="news_show_basic">
+			<div class="news_show_basic_inner">
+				<div class="news_show_basic_cell_title">
+					發佈時間
+				</div>	
+				<div class="news_show_basic_cell_content">
+					<%=@news.created_at.strftime "%Y-%m-%d"%>
+				</div>					
+			</div>				
+			<div class="news_show_basic_inner">
+				<div class="news_show_basic_cell_title">
+					點閱
+				</div>	
+				<div class="news_show_basic_cell_content">
+					<%=@news.view%>
+				</div>									
+			</div>		
+			<%unless @news.cce_class.blank?%>	
+			<div class="news_show_basic_inner">
+				<div class="news_show_basic_cell_title">
+					相關課程
+				</div>	
+				<div class="news_show_basic_cell_content">
+					<%=link_to @news.cce_class.title, @news.cce_class%>
+				</div>						
+			</div>	
+			<%end%>
+			<%unless @news.link.blank?%>
+			<div class="news_show_basic_inner">
+				<div class="news_show_basic_cell_title">
+					相關連結
+				</div>	
+				<div class="news_show_basic_cell_content">
+					<%= link_to @news.link, @news.link%>
+				</div>						
+			</div>
+			<%end%>													
+		</div>	
+		<div class="news_show_main">
+		<%=simple_format(@news.content) %>
+		</div>
+		<%unless @news.DM.blank?%>
+		<div class="news_show_DM">
+		<%=image_tag @news.DM, style: "width: 100%"%>
+		</div>	
+		<%end%>
+		<div class="news_show_others">
+			<div class="news_show_others_inner">
+				<div class="news_show_others_title">
+					發佈人
+				</div>	
+				<div class="news_show_others_content">
+					<%=@news.user.name %>
+				</div>					
+			</div>
+			<div class="news_show_others_inner">
+				<div class="news_show_others_title">
+					發佈人信箱
+				</div>	
+				<div class="news_show_others_content">
+					<%=@news.user.email %>
+				</div>					
+			</div>									
+		</div>			
+	</div>	
+</div>

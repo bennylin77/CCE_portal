@@ -1,0 +1,58 @@
+<div class="function_title">最新消息列表</div>
+<div class="function_field">
+<%= link_to '申請刊登最新消息', new_news_path, class: 'function_button'%>
+<%= link_to '電子郵件廣告列表', edms_path, class: 'function_button' %>	
+</div>
+<section class="index_table">
+  <div class="index_row">
+	  <div class="index_title">
+	     名稱
+	  </div>
+	  <div class="index_title">
+	    建立日期
+	  </div>
+	  <div class="index_title">
+	    審核人
+	  </div>	  
+	  <div class="index_title">
+	  </div>
+  </div>   
+  
+  <% @news.each do |news| %> 
+  <div class="index_row" >
+  	  <div class="index_content">	
+  	  <%= news.title %>
+	  </div>
+  	  <div class="index_content">	
+  	  <%= news.created_at.strftime "%Y-%m-%d" %>
+	  </div>
+	  <div class="index_content">
+	  <%unless news.verified_user_id.blank?%>	
+	  <%= User.find(news.verified_user_id).name %>
+	  <%else%>
+	  --
+	  <%end%>
+	  </div> 		  
+  	  <div class="index_content">	
+        <%if news.verified%>
+        <%= link_to '取消通過', {controller: :news, action: :verified, id: news.id }, class: 'function_sub_button' %>
+        <%else%>
+        <%= link_to '通過', {controller: :news, action: :verified, id: news.id },  class: 'function_sub_button'%>        
+        <%end%>	    	  	
+  	  <%= link_to '詳細', news, class: 'function_sub_button' %>
+  	  <%= link_to '編輯', edit_news_path(news), class: 'function_sub_button' %>
+  	  <%= link_to '刪除', news, method: :delete, class: 'function_del_button' , data: { confirm: '您確定要刪除 '+news.title+' ?' } %>
+	  </div>
+  </div>   	  	
+  <div class="index_row">
+  	<div class="index_border"></div>
+  	<div class="index_border"></div>
+  	<div class="index_border"></div>
+   	<div class="index_border"></div> 	
+  </div>    
+  <% end %>	  	   
+     	
+</section>  	
+<div class="apple_pagination">
+<%= will_paginate @news %>
+</div>

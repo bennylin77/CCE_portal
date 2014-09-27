@@ -1,0 +1,146 @@
+<div id="masonry-container" class="masonry-container transitions-enabled clearfix">	
+<%= render(:partial => "cce_class_block", :collection => @cce_classes)|| "none" %>
+</div>	
+
+<%= javascript_tag do %>
+	$(function() 
+	{
+		//initial masonry
+		var $container = $('#masonry-container');
+		$container.imagesLoaded(function(){
+			$container.masonry({
+			      itemSelector: '.cce_box',
+			      columnWidth: 32,
+			      gutter: 15,
+			      isFitWidth: true
+			});
+			$container.children().each( function( i, val ) {
+				//$('#rollover_'+$(val).attr('id')).css("height",$('#inner_'+$(val).attr('id')).height());
+			});			
+		});		
+		//initial fancybox
+		$(".openAjax").fancybox({
+			tpl: {
+			  closeBtn: "<div title='Close' class='cce_class_show_close'>x</div>"
+			},		
+			padding: 35,			
+    		openEffect	: 'elastic',
+    		closeEffect	: 'elastic',			
+			type: 'ajax',								
+	        afterShow: function() {
+	           //FB.XFBML.parse();
+	           window.history.pushState("", "",$(this).attr( "href" ));
+	        },
+	        afterClose: function(){
+	           window.history.back();
+	           var $container = $('#masonry-container');
+			   $container.masonry({
+			      columnWidth: 32,
+			      gutter: 15,
+			      isFitWidth: true
+			   });
+	        }
+		});		
+	});	
+	// define pageless callback function
+	endPage = function(){ 
+		//$('#at_bottom').css('display','block');			
+	};	
+	// define pageless callback function			
+	handleMasonry = function(data){ 
+		var $container = $('#masonry-container');
+		data=$.parseHTML( data );
+		$(data).imagesLoaded(function(){
+			$container.append(data);
+			$container.masonry('appended', data);
+			$container.children().each( function( i, val ) {
+				//$('#rollover_'+$(val).attr('id')).css("height",$('#inner_'+$(val).attr('id')).height());
+			});			
+		});	    	  	
+	};
+	$('#masonry-container').pageless({
+		totalPages: <%= @cce_classes.total_pages %>,
+		<%unless params[:action]=='search'%>
+		url: '<%= cce_classes_path %>',
+		<%else%>
+		url: '/cce_classes/search',
+		params: { search:{ term: '<%=@term%>'}}, 		
+		<%end%>
+		loaderImage: '<%=  image_path("loading.gif") %>', 
+		end: endPage,
+		scrape: handleMasonry		
+     });
+<% end %>
+<script>
+	function filterAjax() {
+		var request = $.ajax({
+			url: '<%= cce_classes_path %>',
+			type: "GET",
+			data: {dimension: $('#dimension').val(), kind: $('#kind').val(), status: $('#status').val() }
+		});
+		request.done(function( msg ) {								
+			var $container = $('#masonry-container');
+			data=$.parseHTML( msg );
+			$(data).imagesLoaded(function(){
+				var elems = $container.masonry('getItemElements');
+				$container.masonry('remove', elems);
+				$container.masonry();
+				$container.append(data);
+				$container.masonry('appended', data);
+	
+				if(data.length==1)	
+				{
+					$container.pageless({
+						currentPage: 1,
+						totalPages: 1,
+						loaderImage: '<%=  image_path("loading.gif") %>', 							
+						params: { dimension: $('#dimension').val(), kind: $('#kind').val(), status: $('#status').val()},
+						url: '/cce_classes',
+						end: endPage,
+						scrape: handleMasonry	
+					});	
+				}					
+				else
+				{		
+					$container.pageless({
+						currentPage: 1,
+						loaderImage: '<%=  image_path("loading.gif") %>', 							
+						params: { dimension: $('#dimension').val(), kind: $('#kind').val(), status: $('#status').val()},
+						url: '/cce_classes',
+						end: endPage,
+						scrape: handleMasonry	
+					});		
+				}
+							    
+				$container.children().each( function( i, val ) {
+							//$('#rollover_'+$(val).attr('id')).css("height",$('#inner_'+$(val).attr('id')).height());
+						});			
+			});					
+		});
+		request.fail(function( jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
+		});			
+	}
+	
+	$('#dimension').change(function() {
+		filterAjax();		
+	});
+	$('#kind').change(function() {
+		filterAjax();			
+	});
+	$('#status').change(function() {
+		filterAjax();	
+	});	
+/*
+$('#status').hover(function(){
+    var count = $(this).children().length;
+	$(this).attr('size', count);
+},function(){
+    $(this).removeAttr('size');
+});*/	
+</script>
+
+
+
+
+

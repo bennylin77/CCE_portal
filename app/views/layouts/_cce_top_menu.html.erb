@@ -1,0 +1,113 @@
+<script>
+	$(function() {
+		$("#search_term").autocomplete({
+			source : function(request, response) {
+				$.ajax({
+					<%if params[:controller]=='news'%>
+					url : "/news/autoComplete",					
+					<%elsif params[:controller]=='cce_classes'%>
+					url : "/cce_classes/autoComplete",					
+					<%end%>
+					data : {
+						term : request.term
+					},
+					dataType : "json",
+					success : function(data) {
+						response($.map(data, function(item) {
+							return {
+								label : item.label,
+								value : item.value
+							}
+						}));
+					}
+				});
+			},
+			select : function(event, ui) {
+				$("#search_term").val(ui.item.value)
+			},
+			minLength : 2
+		});
+	}); 
+</script>
+<div class="cce_top_menu_container">
+	<div class="logo_container">
+		<div class="logo_container_title">
+			<div class="logo_container_title_inner_cce">CCE</div>
+			<div class="logo_container_title_inner_en">Center for Continuing Education</div>
+			<div class="logo_container_title_inner_ch">國立交通大學</div>	
+			<div class="logo_container_title_inner_ch">推廣教育中心</div>	
+		</div>	
+		<div class="logo_container_pic">
+			<%=image_tag "NCTU_parts.svg"%>
+		</div>			
+	</div>
+	<div class="title_container">
+		<div class="title_container_left">
+			<%if params[:controller]=='news'%>
+				<%if params[:action]=='index' or params[:action]=='search'%>			
+				<div style="float: left; font-size: 26px;" class="course_news-icon icon-sound"></div><div class="title_container_left_content">消息公告NEWS</div>
+				<%else%>
+				<div style="float: left; font-size: 26px;" class="management-icon icon-management"></div><div class="title_container_left_content">消息公告管理NEWS MNGEMT</div>				
+				<%end%>							
+			<%elsif params[:controller]=='cce_classes'%>
+				<%if params[:action]=='index' or params[:action]=='search'%>
+				<div style="float: left; font-size: 26px;" class="course_news-icon icon-stack"></div><div class="title_container_left_content">推廣教育課程COURSES</div>								
+				<%else%>
+				<div style="float: left; font-size: 26px;" class="management-icon icon-management"></div><div class="title_container_left_content">推廣教育課程管理COURSES MNGEMT</div>												
+				<%end%>
+			<%elsif params[:controller]=='users'%>
+			<div style="float: left; font-size: 26px;" class="management-icon icon-management" ></div><div class="title_container_left_content">會員管理USERS MNGEMT</div>	
+			<%elsif params[:controller]=='main'%>
+				<%if params[:action]=='CCENow'%>
+				<div style="float: left; font-size: 26px;" class="left_bot-icon icon-institution"></div><div class="title_container_left_content">中心現況</div>	
+				<%elsif params[:action]=='CCELocation'%>
+				<div style="float: left; font-size: 26px;" class="left_bot-icon icon-location"></div><div class="title_container_left_content">中心位置</div>	
+				<%elsif params[:action]=='CCEMembers'%>
+				<div style="float: left; font-size: 26px;" class="left_bot-icon icon-users"></div><div class="title_container_left_content">成員執掌</div>					
+				<%elsif params[:action]=='CCEEnactment'%>
+				<div style="float: left; font-size: 26px;" class="left_bot-icon icon-justice"></div><div class="title_container_left_content">法規及表格</div>					
+				<%end%>
+			<%end%>
+		</div>
+		<div class="title_container_right">
+			<%if params[:controller]=='cce_classes' and (params[:action]=='index' or params[:action]=='search')%>
+				<%= form_tag '/cce_classes/search', method: 'get', class: 'search_box' do %>
+				<%= text_field :search, :term, value: @term , size: 25, placeholder: '搜尋推教課程' %>
+				<%= button_tag " ", class: 'search-icon icon-search' %>
+				<% end %>
+			<%elsif params[:controller]=='news' and (params[:action]=='index' or params[:action]=='search')%>
+				<%= form_tag '/news/search', method: 'get', class: 'search_box' do %>
+				<%= text_field :search, :term, value: @term , size: 25, placeholder: '搜尋消息公告' %>
+				<%= button_tag " ", class: 'search-icon icon-search' %>
+				<% end %>			
+			<%end%>	
+		</div>					
+	</div>	
+	<%if params[:controller]=='cce_classes' and (params[:action]=='index' or params[:action]=='search')%>
+	<div class="filter_container">
+		<div class="filter_container_left">
+			<div class="filter_container_left_content"></div>
+		</div>	
+		<div class="filter_container_right">
+			<div class="select_container" style="border: none">	
+				<div class="select_filter">
+				<%= select_tag  "dimension", options_from_collection_for_select(Dimension.all, 'id', 'name'), prompt: "全部課程分類", class: 'dimension_select_filter'%>		
+				<span class="filter-arrow-icon icon-filter"></span>
+				</div>
+			</div>				
+			<div class="select_container">	
+				<div class="select_filter">
+				<%= select_tag  "kind", options_for_select(kindOptions), prompt: "全部課程類別", class: 'kind_select_filter'%>		
+				<span class="filter-arrow-icon icon-filter"></span>
+				</div>
+			</div>	
+			<div class="select_container">	
+				<div class="select_filter">
+				<%= select_tag  "status", options_for_select(statusOptions), prompt: "全部課程狀態", class: 'status_select_filter'%>
+				<span class="filter-arrow-icon icon-filter"></span>
+				</div>
+			</div>	
+		</div>	
+	</div>	
+	<%end%>		
+</div>

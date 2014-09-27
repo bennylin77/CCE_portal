@@ -1,0 +1,76 @@
+<div class="function_title">推廣教育課程列表</div>
+<div class="function_field">
+<%= link_to '申請推廣教育課程', new_cce_class_path, class: 'function_button' %>
+<%= link_to '課程分類列表', dimensions_path, class: 'function_button' %>	
+</div>
+<section class="index_table">
+  <div class="index_row">
+	  <div class="index_title">
+	     課程學年
+	  </div>     	
+	  <div class="index_title">
+	     課程名稱
+	  </div>
+	  <div class="index_title">
+	     建立日期
+	  </div>   
+	  <div class="index_title">
+	     審核人
+	  </div>  	   
+	  <div class="index_title">
+	  </div>  	       	
+  </div>  
+ <% @cce_classes.each do |cce_class| %> 
+  <div class="index_row" >
+  	  <div class="index_content">
+	  <%= cce_class.school_year %>	  
+	  </div>  
+	  <div class="index_content">
+	  <%= cce_class.title %>
+	  </div>
+	  <div class="index_content">
+	  <%= cce_class.created_at.strftime "%Y-%m-%d" %>
+	  </div>   
+	  <div class="index_content">
+	  <%unless cce_class.verified_user_id.blank?%>	
+	  <%= User.find(cce_class.verified_user_id).name %>
+	  <%else%>
+	  --
+	  <%end%>
+	  </div> 	  	 
+	  <div class="index_content">
+        <%if cce_class.verified%>
+        <%= link_to '取消通過', {controller: :cce_classes, action: :verified, id: cce_class.id }, class: 'function_sub_button' %>
+        <%= link_to '新增子課程', {controller: :courses, action: :new, cce_class_id: cce_class.id} , class: 'function_sub_button' %>        
+        <%else%>
+        <%= link_to '通過', {controller: :cce_classes, action: :verified, id: cce_class.id },  class: 'function_sub_button'%>        
+        <%end%>	  	
+        <%= link_to '續開相同課程', {controller: :cce_classes, action: :new, id: cce_class.id}, class: 'function_sub_button' %>        
+        <%= link_to '詳細', {controller: :cce_classes, action: :showManagement, id: cce_class.id}, class: 'function_sub_button' %>
+        <%= link_to '編輯', edit_cce_class_path(cce_class), class: 'function_sub_button' %>
+        <%= link_to '刪除', cce_class, method: :delete, class: 'function_del_button', data: { confirm: '您確定要刪除 '+cce_class.title+' ?' } %>	  	
+	  </div>   		            	
+  </div>  
+  <% cce_class.courses.each do |course| %>
+  <div class="index_row">
+       <div class="index_content">子課程</div>  	
+       <div class="index_content"><%=course.title%></div>
+       <div class="index_content">        
+       	<%= link_to '詳細', course, class: 'function_sub_button' %>
+        <%= link_to '編輯', edit_course_path(course), class: 'function_sub_button' %>
+        <%= link_to '刪除', course, method: :delete, class: 'function_del_button', data: { confirm: '您確定要刪除 '+course.title+' ?' } %>
+        </div>  
+  </div>     
+  <%end%>
+  <div class="index_row">
+  	<div class="index_border"></div>
+  	<div class="index_border"></div>
+  	<div class="index_border"></div>
+	<div class="index_border"></div>  	
+	<div class="index_border"></div>  	
+  </div>
+  <%end%>  
+</section>  
+<div class="apple_pagination">
+<%= will_paginate @cce_classes %>
+</div>

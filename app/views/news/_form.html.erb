@@ -1,0 +1,68 @@
+<%= form_for(@news) do |f| %>
+  <% if @news.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@news.errors.count, "error") %> prohibited this news from being saved:</h2>
+
+      <ul>
+      <% @news.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <section class="form_table">  
+  <div class="form_row">
+	  <div class="form_title">
+	  相關推廣教育課程
+	  </div>
+	  <div class="form_content">
+	  <%= f.select :cce_class_id , options_from_collection_for_select( CceClass.where('status <> ?', GLOBAL_VAR['status_finished']).order("id DESC"), 'id', 'title'), {prompt: '選擇相關推廣教育課程'} %> 
+	  </div>         	
+  </div>
+  <div class="form_row">
+	  <div class="form_title">
+	  標題*
+	  </div>
+	  <div class="form_content">
+	  <%= f.text_field :title, size: 35 %>
+	  </div>         	
+  </div>  
+  <div class="form_row">
+	  <div class="form_title">
+	  內容*
+	  </div>
+	  <div class="form_content">
+	  <%= f.text_area :content, size: '50x15' %>
+	  </div>         	
+  </div> 
+  <div class="form_row">
+	  <div class="form_title">
+	  封面上傳
+	  </div>
+	  <div class="form_content">
+	  <%= f.file_field :cover, accept: "image/*"%>    
+	  </div>         	
+  </div>   
+  <div class="form_row">
+	  <div class="form_title">
+	  DM上傳
+	  </div>
+	  <div class="form_content">
+	  <%= f.file_field :DM, accept: "image/*"%>    
+	  </div>         	
+  </div>    
+  <div class="form_row">
+	  <div class="form_title">
+	  相關連結
+	  </div>
+	  <div class="form_content">
+	  <%= f.text_field :link, size: 35 %>
+	  </div>         	
+  </div>   
+  <div class="form_row">
+  	<div class="form_title">
+    <%= f.button '確認送出' %>
+    </div>
+  </div>          
+  </section>
+<% end %>
