@@ -1,5 +1,7 @@
 class EdmsController < ApplicationController
   before_action :set_edm, only: [:show]
+  before_action :authorize
+  before_action only: [:index, :show, :new, :create] { |c| c.checkIdentity(no: 1, identity1: GLOBAL_VAR['identity_CCE'])}  
 
   def index
     @edms = Edm.all.paginate(per_page: 30, page: params[:page]).order('id DESC') 

@@ -274,7 +274,10 @@
 	display: block;
 	font-weight: bold;
 	padding: 5px 10px;
-	font-size: 16px;	
+	font-size: 16px;		
+}
+.CCEEnactment_section_inner ul a:hover {
+    opacity: 0.8	
 }
 /**************     CCEEnactment  **************/
 .CCELocation_nav {

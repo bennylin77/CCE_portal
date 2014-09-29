@@ -1,7 +1,10 @@
 <div class="function_title">會員</div>
+<%if User.find(session[:user_id]).identity == GLOBAL_VAR['identity_CCE']%>
 <div class="function_field">
 <%= link_to '回會員列表', {controller: 'users', action: 'index'} , class: 'function_button' %>
 </div>
+<%end%>
+
 <section class="show_table">
   <div class="show_row">
 	  <div class="show_title">

@@ -17,6 +17,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :salt
       t.integer :identity
       t.string :verify_code
+      t.string :emergency_name
+      t.string :emergency_phone_no      
       t.boolean :verified, default: false
       t.boolean :edm, default: true      
       t.timestamps

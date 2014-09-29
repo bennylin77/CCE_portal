@@ -1,7 +1,11 @@
 #encoding: UTF-8
 class CceClassesController < ApplicationController
   before_action :set_cce_class, only: [:show, :showManagement, :edit, :update, :destroy, :verified, :available, :signsheet]
-
+  before_action only: [:verified] { |c| c.checkIdentity(no: 1, identity1: GLOBAL_VAR['identity_CCE'])}  
+  before_action only: [:new, :create] { |c| c.checkIdentity(no: 2, identity1: GLOBAL_VAR['identity_CCE'], identity2: GLOBAL_VAR['identity_employee'])}  
+  before_action only: [:edit, :update, :destroy] { |c| c.checkUser(id: @cce_class.user.id )} 
+  
+  
   def index    
     if params[:dimension].blank? and params[:kind].blank? and params[:status].blank?
       @cce_classes = CceClass.where("verified = true").paginate(per_page: 30, page: params[:page]).order('id DESC')       
@@ -18,8 +22,7 @@ class CceClassesController < ApplicationController
     elsif !params[:dimension].blank? and params[:kind].blank? and !params[:status].blank?    
        @cce_classes = CceClass.joins(:cce_class_dimensions).where("verified = true and cce_class_dimensions.dimension_id = ? and status = ?", params[:dimension], params[:status]).paginate(per_page: 30, page: params[:page]).order('id DESC')                                          
     elsif !params[:dimension].blank? and !params[:kind].blank? and !params[:status].blank?   
-       @cce_classes = CceClass.joins(:cce_class_dimensions).where("verified = true and cce_class_dimensions.dimension_id = ? and kind = ? and status = ?", params[:dimension], params[:kind], params[:status]).paginate(per_page: 30, page: params[:page]).order('id DESC')                                          
-                   
+       @cce_classes = CceClass.joins(:cce_class_dimensions).where("verified = true and cce_class_dimensions.dimension_id = ? and kind = ? and status = ?", params[:dimension], params[:kind], params[:status]).paginate(per_page: 30, page: params[:page]).order('id DESC')                                                       
     end    
  
     if request.xhr?
@@ -41,7 +44,11 @@ class CceClassesController < ApplicationController
   end
   
   def indexManagement
-    @cce_classes = CceClass.all.paginate(per_page: 30, page: params[:page]).order('id DESC')    
+    if User.find(session[:user_id]).identity==GLOBAL_VAR['identity_CCE']
+      @cce_classes = CceClass.all.paginate(per_page: 30, page: params[:page]).order('id DESC')   
+    else 
+      @cce_classes = User.find(session[:user_id]).cce_classes.paginate(per_page: 30, page: params[:page]).order('id DESC')  
+    end         
   end
 
   def new
@@ -132,11 +139,9 @@ class CceClassesController < ApplicationController
     redirect_to controller: :cce_classes, action: :indexManagement    
   end
   
-  
-  
-  
-  def addItem
     
+=begin  
+  def addItem    
     for i in 0..1000
       @cce_class = CceClass.new(title: '網路行銷與網站企劃實務班', status: GLOBAL_VAR['status_enrollment'], kind: GLOBAL_VAR['kind_training'],
                                start_at: Date.today(), end_at: Date.today(),  
@@ -151,11 +156,7 @@ class CceClassesController < ApplicationController
     
     redirect_to cce_classes_url
   end
-  
-  
-  
-  
-  
+=end  
   
   def search 
     @term=params[:search][:term]     

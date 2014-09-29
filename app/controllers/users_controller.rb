@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :verifyCode, :pwReset]
+  #before_action :authorize  
+  #before_action only: [:index, :new, :create, :destroy, :pwReset] { |c| c.checkIdentity(no: 1, identity1: GLOBAL_VAR['identity_CCE'])}  
+  before_action only: [:edit, :update, :show] { |c| c.checkUser(id: params[:id] )}  
 
   def index
-    @users = User.all.paginate(per_page: 30, page: params[:page]).order('id DESC') 
+    @users = User.all.paginate(per_page: 100, page: params[:page]).order('id DESC') 
   end
 
   def show
@@ -98,7 +101,8 @@ class UsersController < ApplicationController
     end
     
     def user_params
-      params.require(:user).permit(:name, :email, :extend, :age, :gender, :education, :id_no, :passport_no, :nationality, 
-                                   :birthday, :address, :phone_no, :mobile_no, :identity,:pw , :pw_confirmation, :verified, :edm)
+      params.require(:user).permit(:name, :email, :extend, :gender, :education, :id_no, :passport_no, :nationality, 
+                                   :birthday, :address, :phone_no, :mobile_no, :identity, :pw, :pw_confirmation, :verified, :edm,
+                                   :emergency_name, :emergency_phone_no)
     end
 end

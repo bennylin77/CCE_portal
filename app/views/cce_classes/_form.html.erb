@@ -46,7 +46,8 @@
   </div> 
   <div class="form_row">
 	  <div class="form_title">
-	          課程分類*(按Ctrl可複選)
+	          課程分類*
+	    <br><span style="font-size: 90%">(按Ctrl可複選)</span>         
 	  </div>
 	  <div class="form_content">
       <%= collection_select(:cce_class, :dimension_ids, 
@@ -188,7 +189,7 @@
   </div>   
   <div class="form_row">
 	  <div class="form_title">
-	      主辦單位*(學校請填學院及系所或中心名稱)
+	      主辦單位*<br><span style="font-size: 90%">(學校請填學院及系所或中心名稱)</span>
 	  </div>
 	  <div class="form_content">
       <%= f.text_field :organizer, size: 50 %>
@@ -301,7 +302,8 @@
   </div>       
   <div class="form_row">
 	  <div class="form_title">
-	     學校管理費*(學分班為15%)
+	     學校管理費*
+	  <br><span style="font-size: 90%">(學分班為15%)</span>   
 	  </div>
 	  <div class="form_content">
       <%= f.number_field :school_expenses, in: 0..5000000, step: 1 %> NT

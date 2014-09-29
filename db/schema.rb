@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 20140920034453) do
     t.string   "name"
     t.string   "email"
     t.integer  "extend"
-    t.boolean  "gender",      default: true
+    t.boolean  "gender",             default: true
     t.string   "education"
     t.string   "id_no"
     t.string   "passport_no"
@@ -158,8 +158,10 @@ ActiveRecord::Schema.define(version: 20140920034453) do
     t.string   "salt"
     t.integer  "identity"
     t.string   "verify_code"
-    t.boolean  "verified",    default: false
-    t.boolean  "edm",         default: true
+    t.string   "emergency_name"
+    t.string   "emergency_phone_no"
+    t.boolean  "verified",           default: false
+    t.boolean  "edm",                default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

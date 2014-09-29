@@ -1,13 +1,19 @@
 class NewsController < ApplicationController
   before_action :set_news, only: [:verified, :show, :edit, :update, :destroy]
-
+  before_action only: [:verified] { |c| c.checkIdentity(no: 1, identity1: GLOBAL_VAR['identity_CCE'])}  
+  before_action only: [:indexManagement, :new, :create] { |c| c.checkIdentity(no: 2, identity1: GLOBAL_VAR['identity_CCE'], identity2: GLOBAL_VAR['identity_employee'])}  
+  before_action only: [:edit, :update, :destroy] { |c| c.checkUser(id: @news.user.id )} 
 
   def index
     @news = News.where('verified = true').paginate(per_page: 8, page: params[:page]).order('id DESC') 
   end
 
   def indexManagement
-    @news = News.all.paginate(per_page: 30, page: params[:page]).order('id DESC')    
+    if User.find(session[:user_id]).identity==GLOBAL_VAR['identity_CCE']
+      @news = News.all.paginate(per_page: 30, page: params[:page]).order('id DESC')
+    else
+      @news = User.find(session[:user_id]).news.paginate(per_page: 30, page: params[:page]).order('id DESC')      
+    end        
   end
 
   def show  

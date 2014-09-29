@@ -117,18 +117,18 @@
   <%end%>  
   <div class="form_row">
 	  <div class="form_title">
+	     手機號碼*
+	  </div>
+	  <div class="form_content">
+   	  <%= f.text_field :mobile_no, size: 30  %>
+	  </div>         	
+  </div>    
+  <div class="form_row">
+	  <div class="form_title">
 	  電話號碼
 	  </div>
 	  <div class="form_content">
    	  <%= f.text_field :phone_no, size: 30  %>
-	  </div>         	
-  </div>  
-  <div class="form_row">
-	  <div class="form_title">
-	  手機號碼*
-	  </div>
-	  <div class="form_content">
-   	  <%= f.text_field :mobile_no, size: 30  %>
 	  </div>         	
   </div>  
   <div class="form_row">
@@ -165,7 +165,23 @@
 	  <div class="form_content">
    	  <%= f.text_field :education, size: 30 %>
 	  </div>         	
-  </div>  
+  </div>   
+  <div class="form_row">
+	  <div class="form_title">
+	     緊急聯絡人姓名
+	  </div>
+	  <div class="form_content">
+   	  <%= f.text_field :emergency_name, size: 30  %>
+	  </div>         	
+  </div> 
+  <div class="form_row">
+	  <div class="form_title">
+	     緊急聯絡人電話號碼
+	  </div>
+	  <div class="form_content">
+   	  <%= f.text_field :emergency_phone_no, size: 30  %>
+	  </div>         	
+  </div>      
   <div class="form_row">
 	  <div class="form_title">
 	  訂閱最新課程資訊

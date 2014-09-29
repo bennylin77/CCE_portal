@@ -1,5 +1,7 @@
 class DimensionsController < ApplicationController
+  before_action :authorize  
   before_action :set_dimension, only: [:show, :edit, :update, :destroy]
+  before_action only: [:index, :new, :edit, :create, :update, :destroy] { |c| c.checkIdentity(no: 1, identity1: GLOBAL_VAR['identity_CCE'])}  
 
   def index
     @dimensions = Dimension.all

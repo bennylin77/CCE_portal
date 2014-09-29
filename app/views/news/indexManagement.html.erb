@@ -1,7 +1,9 @@
 <div class="function_title">最新消息列表</div>
 <div class="function_field">
 <%= link_to '申請刊登最新消息', new_news_path, class: 'function_button'%>
+<%unless User.find(session[:user_id]).identity!=GLOBAL_VAR['identity_CCE'] %>
 <%= link_to '電子郵件廣告列表', edms_path, class: 'function_button' %>	
+<%end%>
 </div>
 <section class="index_table">
   <div class="index_row">
@@ -34,11 +36,13 @@
 	  <%end%>
 	  </div> 		  
   	  <div class="index_content">	
+  	  <%unless User.find(session[:user_id]).identity!=GLOBAL_VAR['identity_CCE'] %>
         <%if news.verified%>
         <%= link_to '取消通過', {controller: :news, action: :verified, id: news.id }, class: 'function_sub_button' %>
         <%else%>
         <%= link_to '通過', {controller: :news, action: :verified, id: news.id },  class: 'function_sub_button'%>        
-        <%end%>	    	  	
+        <%end%>	  
+      <%end%>    	  	
   	  <%= link_to '詳細', news, class: 'function_sub_button' %>
   	  <%= link_to '編輯', edit_news_path(news), class: 'function_sub_button' %>
   	  <%= link_to '刪除', news, method: :delete, class: 'function_del_button' , data: { confirm: '您確定要刪除 '+news.title+' ?' } %>
