@@ -4,9 +4,44 @@
 <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<p>您好!</p>
+<div style="color: #198EB9; font-family: Microsoft JhengHei, 'Lato', Calibri, Arial, sans-serif; padding: 5px 20px;">	
+<div style="font-weight: bold; margin-top: 5px; margin-bottom: 10px; width: 130px; border: 2px solid #198EB9;color: #198EB9;	">
+	<div style="width: 80%;
+			    text-align: center;
+				font-size: 26px;
+				line-height: 28px;
+				margin-left: 18px;
+				letter-spacing: 15px;
+    			font-family: Microsoft JhengHei, Palatino Linotype;		
+    			font-style: italic;	">CCE</div>
+	<div style="margin-left: 12%; 
+				width: 80%; 
+				line-height: 13px; 
+				letter-spacing: 7px; 
+				font-size: 10px; 
+				text-align: center;	">國立交通大學</div>	
+	<div style="margin-left: 12%; 
+				width: 80%; 
+				line-height: 13px; 
+				letter-spacing: 7px; 
+				font-size: 10px; 
+				text-align: center;	">推廣教育中心</div>	
+</div>	
+<div style="letter-spacing: 1.5px;
+		    padding-bottom: 30px; 
+		    padding-top: 10px; 	
+		    padding-left: 12px; 		    	    
+		    border-bottom: 1px solid #198EB9; 
+		    border-top: 1px solid #198EB9; 
+		    margin-bottom: 30px;">
+<p><%=@user.name %> 您好:</p>
 <p>國立交通大學推廣教育中心，會員密碼重設通知。</p>
 <p>新密碼：<%= @new_pw%></p>
 <p>網址：<%=link_to domain, domain%></p>
+<div>
+	如有疑問請洽詢 Tel: (03)5712121#52527   國立交通大學推廣教育中心
+</div>	
+</div>
+</div>
 </body>
 </html>

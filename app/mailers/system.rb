@@ -1,6 +1,6 @@
 # encoding: utf-8
 class System < ActionMailer::Base
-  default from: "國立交通大學推廣教育中心 <CCE@nctu.edu.tw>"
+  default from: "國立交通大學推廣教育中心 <cce@nctu.edu.tw>"
   helper ApplicationHelper  
   
   def sendVerification(hash={})
@@ -10,7 +10,7 @@ class System < ActionMailer::Base
   def sendResetPw(hash={})
     @user=hash[:user]
     @new_pw=hash[:new_pw]
-    mail( to: @user.email , subject:"國立交通大學推廣教育中心  密碼重設通知")
+    mail( to: @user.email, subject:"國立交通大學推廣教育中心  密碼重設通知")
   end 
   def sendEDM(hash={})
     @edm=hash[:edm]
