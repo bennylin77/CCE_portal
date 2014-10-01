@@ -3,7 +3,37 @@
 <head>
 <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
-<body>	
+<body>
+<div style="font-family: Microsoft JhengHei, 'Lato', Calibri, Arial, sans-serif; padding: 5px 20px;	background: #F2EEEA;">	
+<div style="font-weight: bold; margin-top: 5px; margin-bottom: 10px; width: 130px; border: 2px solid #198EB9;color: #198EB9;	">
+	<div style="width: 80%;
+			    text-align: center;
+				font-size: 26px;
+				line-height: 28px;
+				margin-left: 18px;
+				letter-spacing: 15px;
+    			font-family: Microsoft JhengHei, Palatino Linotype;		
+    			font-style: italic;	">CCE</div>
+	<div style="margin-left: 12%; 
+				width: 80%; 
+				line-height: 13px; 
+				letter-spacing: 7px; 
+				font-size: 10px; 
+				text-align: center;	">國立交通大學</div>	
+	<div style="margin-left: 12%; 
+				width: 80%; 
+				line-height: 13px; 
+				letter-spacing: 7px; 
+				font-size: 10px; 
+				text-align: center;	">推廣教育中心</div>	
+</div>	
+<div style="letter-spacing: 1.5px;
+		    padding-bottom: 30px; 
+		    padding-top: 10px; 	
+		    padding-left: 5px; 		    	    
+		    border-bottom: 1px solid #198EB9; 
+		    border-top: 1px solid #198EB9; 
+		    margin-bottom: 30px;">		
 <div class="masonry" style="-moz-column-count: 4;
 						    -webkit-column-count: 4;
 						    column-count: 4;
@@ -13,46 +43,46 @@
    <% @edm.news.each do |n|%>						      
    <div class="news_box" style="display: inline-block;
    							    margin: 0 0 1em;
-			                    width: 300px;
+			                    width: 220px;
   	                            background: #198EB9;">
 		<a href="<%=domain+'/news/'+n.id.to_s%>" style="text-decoration: none;">
 		<div class="content_news_block">				
 				<div style="font-family: Microsoft YaHei, 'Lato', Calibri, Arial, sans-serif;	
 							width: 89%;
 							color: #F2EEEA;	
-							font-size: 17px;
+							font-size: 15px;
 							font-style: italic;
-							letter-spacing: 7px;
+							letter-spacing: 4px;
 							margin: 1em auto 5px;
-							padding-bottom: 6px;	
-							border-bottom: 3px solid #F2EEEA;">
+							padding-bottom: 4px;	
+							border-bottom: 2px solid #F2EEEA;">
 				<%=n.title%>		
 				</div>	
 				<%unless n.cover.blank?%>			
 				<div style="width: 89%; 
 	                        margin: 10px auto;
 	                        padding-bottom: 6px;		
-	                        border-bottom: 3px solid #F2EEEA;">			
+	                        border-bottom: 2px solid #F2EEEA;">			
 					<%=image_tag n.cover, style: "width: 100%"%>
 				</div>
 				<div style="width: 89%;
 	                        color: #F2EEEA;	
-							line-height: 17px;
-							font-size: 12px;
-							letter-spacing: 3px;
+							line-height: 13px;
+							font-size: 10px;
+							letter-spacing: 1.5px;
 							margin: 0.5em auto; 
-							padding-bottom: 12px;		
+							padding-bottom: 8px;		
 							border-bottom: 1px solid #F2EEEA;">
 					<%=truncate( n.content, length: 55, omission: '... (詳細)')%>
 				</div>
 				<%else%>
 				<div style="width: 89%;
 	                        color: #F2EEEA;	
-							line-height: 17px;
-							font-size: 12px;
-							letter-spacing: 3px;
+							line-height: 12px;
+							font-size: 10px;
+							letter-spacing: 1.5px;
 							margin: 0.5em auto; 
-							padding-bottom: 12px;		
+							padding-bottom: 8px;		
 							border-bottom: 1px solid #F2EEEA;">
 					<%= n.content%>	
 				</div>		
@@ -70,6 +100,8 @@
 	</div>
    <%end%>
 </div>
-<div style="font-size: 12px; margin-bottom: 10px;">可登入後,到 "<%=link_to '會員設定', domain%>" 取消訂閱最新課程資訊</div>	
+<div style=" color:#198EB9; font-size: 12px; margin-bottom: 10px;">可登入後,到 "<%=link_to '會員設定', domain%>" 取消訂閱最新課程資訊</div>	
+</div>
+</div>
 </body>
 </html>
