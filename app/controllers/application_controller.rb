@@ -41,11 +41,17 @@ class ApplicationController < ActionController::Base
   end 
   
   def authorize
-    unless User.find_by_id(session[:user_id])
-      #session[:original_uri]=request.url
-      flash[:title]="登入"         
-      flash[:notice]="請先登入"      
-      redirect_to root_url
-    end
+    unless session[:user_id].blank?
+      unless User.find(session[:user_id])
+        #session[:original_uri]=request.url
+        flash[:title]="系統"         
+        flash[:notice]="請先登入"      
+        redirect_to root_url
+      end
+    else
+        flash[:title]="系統"         
+        flash[:notice]="請先登入"      
+        redirect_to root_url      
+    end    
   end   
 end

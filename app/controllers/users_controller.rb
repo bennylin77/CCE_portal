@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authorize, except: [:signIn]    
   before_action :set_user, only: [:show, :edit, :update, :destroy, :verifyCode, :pwReset]
-  before_action :authorize  
   before_action only: [:index, :new, :create, :destroy, :pwReset] { |c| c.checkIdentity(no: 1, identity1: GLOBAL_VAR['identity_CCE'])}  
   before_action only: [:edit, :update, :show] { |c| c.checkUser(id: params[:id] )}  
 

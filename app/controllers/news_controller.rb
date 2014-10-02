@@ -1,4 +1,5 @@
 class NewsController < ApplicationController
+  before_action :authorize, except: [:index, :show]   
   before_action :set_news, only: [:verified, :show, :edit, :update, :destroy]
   before_action only: [:verified] { |c| c.checkIdentity(no: 1, identity1: GLOBAL_VAR['identity_CCE'])}  
   before_action only: [:indexManagement, :new, :create] { |c| c.checkIdentity(no: 2, identity1: GLOBAL_VAR['identity_CCE'], identity2: GLOBAL_VAR['identity_employee'])}  

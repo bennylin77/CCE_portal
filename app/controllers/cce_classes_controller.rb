@@ -1,5 +1,6 @@
 #encoding: UTF-8
 class CceClassesController < ApplicationController
+  before_action :authorize, except: [:index, :show]  
   before_action :set_cce_class, only: [:show, :showManagement, :edit, :update, :destroy, :verified, :available, :signsheet]
   before_action only: [:verified] { |c| c.checkIdentity(no: 1, identity1: GLOBAL_VAR['identity_CCE'])}  
   before_action only: [:new, :create] { |c| c.checkIdentity(no: 2, identity1: GLOBAL_VAR['identity_CCE'], identity2: GLOBAL_VAR['identity_employee'])}  
