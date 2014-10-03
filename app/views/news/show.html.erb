@@ -31,10 +31,12 @@
 			<%unless @news.cce_class.blank?%>	
 			<div class="news_show_basic_inner">
 				<div class="news_show_basic_cell_title">
-					相關課程
+					課程連結
 				</div>	
 				<div class="news_show_basic_cell_content">
-					<%=link_to @news.cce_class.title, @news.cce_class%>
+					<%=link_to  @news.cce_class do%>
+					<span class="link_attachment icon-link"></span> <%= @news.cce_class.title%>
+					<%end%>
 				</div>						
 			</div>	
 			<%end%>
@@ -44,7 +46,9 @@
 					相關連結
 				</div>	
 				<div class="news_show_basic_cell_content">
-					<%= link_to @news.link, @news.link%>
+					<%= link_to @news.link do%>
+					<span class="link_attachment icon-link"></span> <%= @news.link%>	
+					<%end%>	
 				</div>						
 			</div>
 			<%end%>													

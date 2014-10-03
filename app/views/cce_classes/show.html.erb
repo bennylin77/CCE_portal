@@ -100,7 +100,8 @@
 				<div class="cce_class_show_main_content">
 				<%=simple_format(@cce_class.syllabus)%>
 				</div>	
-			</div>				
+			</div>	
+			<!--			
 			<div class="cce_class_show_main_inner">
 				<div class="cce_class_show_main_title">
 				課程時程表
@@ -108,7 +109,8 @@
 				<div class="cce_class_show_main_content">
 				<%=simple_format(@cce_class.schedule)%>
 				</div>						
-			</div>		
+			</div>
+			-->		
 			<div class="cce_class_show_main_inner">
 				<div class="cce_class_show_main_title">
 				上課時間
@@ -164,7 +166,13 @@
 					相關連結
 				</div>	
 				<div class="cce_class_show_others_content">
-					<%= showBlank( data: link_to(@cce_class.link, @cce_class.link))%>	
+				  	<%unless @cce_class.link.blank?%>
+				  	<%= link_to @cce_class.link do%>	
+				  	<span class="link_attachment icon-link"></span> <%=@cce_class.link%>
+				  	<%end%>
+				  	<%else%>
+				  	--
+				  	<%end%>										
 				</div>					
 			</div>
 			<div class="cce_class_show_others_inner">
@@ -173,7 +181,9 @@
 				</div>	
 				<div class="cce_class_show_others_content">
 				  	<%unless @cce_class.attachment.blank?%>
-				  	<%= link_to( @cce_class.attachment_file_name,  @cce_class.attachment.url())%>	
+				  	<%= link_to @cce_class.attachment.url() do%>	
+				  	<span class="link_attachment icon-attachment"></span> <%=@cce_class.attachment_file_name%>
+				  	<%end%>
 				  	<%else%>
 				  	--
 				  	<%end%>
