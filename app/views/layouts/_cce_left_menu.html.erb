@@ -1,3 +1,12 @@
+<script>
+	$("#openForgotFancybox").fancybox({
+		tpl: {
+			  closeBtn: "<div title='Close' class='cce_class_show_close'>x</div>"
+		},		
+	    openEffect	: 'elastic',
+	    closeEffect	: 'elastic'
+	    });	
+</script>
 <div class="cce_left_menu_container">
 	<div class="signIn_container">
 		<div class="signIn_container_title">
@@ -9,7 +18,14 @@
 			<%=form_tag '/users/signIn' do%>			
 				<%=text_field_tag :email, params[:email], placeholder: 'Email'%>
 				<%=password_field_tag :password, params[:password], placeholder: '密碼'%>		
-				<%=submit_tag "登入"%><a href="#" style="color: #f9f9f9;"><span class="forget_pw" >忘記密碼?</span></a> 
+				<%=submit_tag "登入"%><a id="openForgotFancybox" href="#forgeotPw" style="color: #f9f9f9;"><span class="forget_pw" >忘記密碼?</span></a> 
+				<div id="forgeotPw" style="display: none;
+										   color: #198EB9; 
+										   letter-spacing: 2px;
+				                           font-family: Microsoft JhengHei, 'Lato', Calibri, Arial, sans-serif;">
+					<br>學生密碼預設為身分證字號(第一個英文字母為大寫)
+					<br><br>或致電CCE由中心人員為您重設密碼
+				</div>
 			<%end%>		
 		</div>
 		<%else%>
