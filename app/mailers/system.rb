@@ -13,10 +13,9 @@ class System < ActionMailer::Base
     mail( to: @user.email, subject:"國立交通大學推廣教育中心  密碼重設通知")
   end 
   def sendEDM(hash={})
+    @user=hash[:user]
     @edm=hash[:edm]
-    @recipients = User.where("edm = true")
-    emails = @recipients.collect(&:email).join(",")
-    mail( bcc: emails , subject: @edm.title)    
+    mail( to: @user.email, subject: @edm.title)    
   end   
   
 end

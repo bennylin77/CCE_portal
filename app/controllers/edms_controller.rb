@@ -24,8 +24,11 @@ class EdmsController < ApplicationController
     @edm.user=User.find(session[:user_id])
     
     respond_to do |format|
-      if @edm.save
-        System.sendEDM(edm: @edm).deliver
+      if @edm.save       
+        recipients = User.where("edm = true")
+        recipients.each do |r|
+          System.sendEDM(user: r, edm: @edm).deliver
+        end
         flash[:title]='電子郵件廣告'
         format.html { redirect_to @edm, notice: '成功寄出電子郵件廣告' }
       else

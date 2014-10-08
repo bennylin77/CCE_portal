@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action only: [:edit, :update, :show] { |c| c.checkUser(id: params[:id] )}  
 
   def index
-    @users = User.all.paginate(per_page: 1000, page: params[:page]).order('id DESC') 
+    @users = User.all.paginate(per_page: 200, page: params[:page]).order('id DESC') 
   end
 
   def show
