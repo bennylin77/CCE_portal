@@ -16,7 +16,7 @@
 	  相關推廣教育課程
 	  </div>
 	  <div class="form_content">
-	  <%= f.select :cce_class_id , options_from_collection_for_select( CceClass.where('status <> ?', GLOBAL_VAR['status_finished']).order("id DESC"), 'id', 'title'), {prompt: '選擇相關推廣教育課程'} %> 
+	  <%= f.select :cce_class_id , options_from_collection_for_select( CceClass.where('status <> ?', GLOBAL_VAR['status_finished']).order("id DESC"), 'id', 'title', @news.cce_class_id), {prompt: '選擇相關推廣教育課程'} %> 
 	  </div>         	
   </div>
   <div class="form_row">
