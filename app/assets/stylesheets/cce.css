@@ -806,12 +806,14 @@ button{
 }
 .cce_class_show_title_apply{
 	margin-top: 10px;	
-	height: 70px;
+	min-height: 70px;
 }
 .cce_class_show_title_container{	
-	float:left;
+	display: inline-block;
+	width: 500px;	
 }
 .cce_class_show_apply{
+	display: inline-block;	
 	color: #198EB9;	
 	float: right;
 	width: 100px;
@@ -843,6 +845,7 @@ button{
 	line-height: 25px;
 	letter-spacing: 5px;
 	color: #198EB9;	
+	word-break: break-all;
 }
 .cce_class_show_content{
 	border-top: 1px solid #198EB9;		
