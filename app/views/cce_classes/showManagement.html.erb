@@ -2,7 +2,20 @@
 <div class="function_field">
 <%= link_to '回推廣教育課程列表', { controller: 'cce_classes', action: 'indexManagement' }, class: 'function_button' %>
 <%= link_to '編輯', edit_cce_class_path(@cce_class), class: 'function_button' %>
-<%= link_to '產生會簽單', { controller: 'cce_classes', action: 'signsheet', id: @cce_class.id  }, class: 'function_button' %>
+        <%if @cce_class.verified%>
+	        <%unless User.find(session[:user_id]).identity!=GLOBAL_VAR['identity_CCE'] %>
+	        <%= link_to '取消通過', {controller: :cce_classes, action: :verified, id: @cce_class.id }, class: 'function_button' %>
+	        <%end%>
+        	<%= link_to '新增子課程', {controller: :courses, action: :new, cce_class_id: @cce_class.id} , class: 'function_button' %>        
+       		<%= link_to '續開相同課程', {controller: :cce_classes, action: :new, id: @cce_class.id}, class: 'function_button' %>        
+
+			<%= link_to '經費處理', { controller: 'cce_classes', action: 'signsheet', id: @cce_class.id  }, class: 'function_button' %>
+        <%else%>
+	        <%unless User.find(session[:user_id]).identity!=GLOBAL_VAR['identity_CCE'] %>
+	        <%= link_to '通過', {controller: :cce_classes, action: :verified, id: cce_class.id },  class: 'function_button'%>        
+	        <%end%>
+			<%= link_to '產生會簽單', { controller: 'cce_classes', action: 'signsheet', id: @cce_class.id  }, class: 'function_button' %>  
+        <%end%>	  	     
 </div>
 <section class="show_table">
   <div class="show_row">
