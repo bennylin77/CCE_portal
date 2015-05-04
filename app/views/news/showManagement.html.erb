@@ -1,0 +1,98 @@
+<div class="function_title">消息公告</div>
+<div class="function_field">
+<%= link_to '回消息公告列表', { controller: 'news', action: 'indexManagement' }, class: 'function_button' %>
+  	  <%unless User.find(session[:user_id]).identity!=GLOBAL_VAR['identity_CCE'] %>
+        <%if @news.verified%>
+        <%= link_to '取消通過', {controller: :news, action: :verified, id: @news.id }, class: 'function_button' %>
+        <%else%>
+        <%= link_to '通過', {controller: :news, action: :verified, id: @news.id },  class: 'function_button'%>        
+        <%end%>	  
+      <%end%>    	  	
+  	  <%= link_to '編輯', edit_news_path(@news), class: 'function_button' %>
+  	  <%= link_to '刪除', @news, method: :delete, class: 'function_del_button' , data: { confirm: '您確定要刪除 '+@news.title+' ?' } %>
+	  </div> 	         
+</div>
+
+<div class="news_show" style="margin-left: 250px; margin-top: 40px;">
+	<div class="news_show_logo">
+	  <div class="news_show_logo_en">
+	  	NEWS
+	  </div>	
+	  <div class="news_show_logo_ch">
+	  	消息公告
+	  </div>		  
+	</div>	
+	<div class="news_show_title">
+	  <%= @news.title %>
+	</div>
+	<div class="news_show_content">
+		<div class="news_show_basic">
+			<div class="news_show_basic_inner">
+				<div class="news_show_basic_cell_title">
+					發佈時間
+				</div>	
+				<div class="news_show_basic_cell_content">
+					<%=@news.created_at.strftime "%Y-%m-%d"%>
+				</div>					
+			</div>				
+			<div class="news_show_basic_inner">
+				<div class="news_show_basic_cell_title">
+					點閱
+				</div>	
+				<div class="news_show_basic_cell_content">
+					<%=@news.view%>
+				</div>									
+			</div>		
+			<%unless @news.cce_class.blank?%>	
+			<div class="news_show_basic_inner">
+				<div class="news_show_basic_cell_title">
+					課程連結
+				</div>	
+				<div class="news_show_basic_cell_content">
+					<%=link_to  @news.cce_class do%>
+					<span class="link_attachment icon-link"></span> <%= @news.cce_class.title%>
+					<%end%>
+				</div>						
+			</div>	
+			<%end%>
+			<%unless @news.link.blank?%>
+			<div class="news_show_basic_inner">
+				<div class="news_show_basic_cell_title">
+					相關連結
+				</div>	
+				<div class="news_show_basic_cell_content">
+					<%= link_to @news.link do%>
+					<span class="link_attachment icon-link"></span> <%= @news.link%>	
+					<%end%>	
+				</div>						
+			</div>
+			<%end%>													
+		</div>	
+		<div class="news_show_main">
+		<%=simple_format(@news.content) %>
+		</div>
+		<%unless @news.DM.blank?%>
+		<div class="news_show_DM">
+		<%=image_tag @news.DM, style: "width: 100%"%>
+		</div>	
+		<%end%>
+		<div class="news_show_others">
+			<div class="news_show_others_inner">
+				<div class="news_show_others_title">
+					發佈人
+				</div>	
+				<div class="news_show_others_content">
+					<%=@news.user.name %>
+				</div>					
+			</div>
+			<div class="news_show_others_inner">
+				<div class="news_show_others_title">
+					發佈人信箱
+				</div>	
+				<div class="news_show_others_content">
+					<%=@news.user.email %>
+				</div>					
+			</div>									
+		</div>			
+	</div>	
+</div>

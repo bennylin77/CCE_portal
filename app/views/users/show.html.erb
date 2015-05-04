@@ -2,6 +2,7 @@
 <%if User.find(session[:user_id]).identity == GLOBAL_VAR['identity_CCE']%>
 <div class="function_field">
 <%= link_to '回會員列表', {controller: 'users', action: 'index'} , class: 'function_button' %>
+<%= link_to '刪除', @user, method: :delete, class: 'function_del_button', data: { confirm: '您確定要刪除會員 '+@user.name+' ?' } %>
 </div>
 <%end%>
 

@@ -515,6 +515,22 @@ button{
   	opacity: 0.8;
 } 
 .function_del_button {
+    margin-right: 10px;	
+    cursor: pointer;
+    padding: 7px 0px;
+    padding-left: 10px;
+    border-radius: 1px;
+    font-size: 14px;
+    letter-spacing: 10px;    
+    line-height: 10px;
+    font-family: Microsoft YaHei, 'Lato', Calibri, Arial, sans-serif;	
+	color: #F2EEEA;	    
+    background: #C13333;
+} 
+.function_del_button:hover {
+  	opacity: 0.8;
+} 
+.function_sub_del_button {
     margin-right: 5px;	
     cursor: pointer;
     padding: 5px 10px;
@@ -526,10 +542,9 @@ button{
 	color: #F2EEEA;	    
     background: #C13333;
 } 
-.function_del_button:hover {
+.function_sub_del_button:hover {
   	opacity: 0.8;
 } 
-
 
 .form_table{
 	color: #198EB9;

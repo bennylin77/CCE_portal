@@ -117,7 +117,8 @@ class CceClassesController < ApplicationController
     @cce_class.destroy
     respond_to do |format|
       flash[:title]='推廣教育課程管理'
-      format.html { redirect_to cce_classes_url, notice: '刪除成功' }
+      flash[:notice]='刪除成功'         
+      format.html { redirect_to controller: :cce_classes, action: :indexManagement    }
     end
   end
   
@@ -131,7 +132,7 @@ class CceClassesController < ApplicationController
     @cce_class.save!
     flash[:title]='推廣教育課程管理'
     flash[:notice]='成功更改審核狀態'
-    redirect_to controller: :cce_classes, action: :indexManagement
+    redirect_to  controller: 'cce_classes', action: 'showManagement', id: @cce_class.id    
   end
   
   def available

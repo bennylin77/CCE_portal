@@ -18,32 +18,28 @@
 	  </div>
 	  <div class="form_content">
 	  <%= f.text_field :title, size: 50 %>	
-	  </div>         	
-  </div>  
-  <div class="form_row">
+	  </div>     
 	  <div class="form_title">
 	     課程副標題
 	  </div>
 	  <div class="form_content">
 	  <%= f.text_field :sub_title, size: 50  %>	
-	  </div>         	
-  </div>    
+	  </div>  	      	
+  </div>     
   <div class="form_row">
 	  <div class="form_title">
 	     課程類別*
 	  </div>
 	  <div class="form_content">
 	  <%= f.select :kind, kindOptions ,{prompt: '選擇課程類別'} %>
-	  </div>         	
-  </div>    
-  <div class="form_row">
+	  </div>  
 	  <div class="form_title">
 	    課程狀態*
 	  </div>
 	  <div class="form_content">
       <%= f.select :status, statusOptions ,{prompt: '選擇報名狀態'} %>
-	  </div>         	
-  </div> 
+	  </div>  	           	
+  </div>    
   <div class="form_row">
 	  <div class="form_title">
 	    課程分類*
@@ -83,16 +79,14 @@
 	  </div>
 	  <div class="form_content">
   	  <%= f.number_field :total_hours, in: 0..400, step: 1 %>
-	  </div>         	
-  </div>  
-  <div class="form_row">
+	  </div>  
 	  <div class="form_title">
 	     課程總學分
 	  </div>
 	  <div class="form_content">
       <%= f.number_field :total_credits, in: 0..400, step: 1 %>	  	
-	  </div>         	
-  </div>       
+	  </div> 	         	
+  </div>        
   <div class="form_row">
 	  <div class="form_title">
 	     上課時間*
@@ -227,18 +221,15 @@
 	  </div>
 	  <div class="form_content">
       <%= f.text_field :link, size: 50%>
-	  </div>         	
-  </div>    
-
-  <div class="form_row">
+	  </div>  
 	  <div class="form_title">
-	    線上報名連結
+	    線上報名連結<br><span style="font-size: 90%">(請到 easyregister.tw 建立線上報名)</span>
 	  </div>
 	  <div class="form_content">
       <%= f.text_field :registration_link, size: 50%>
-	  </div>         	
+	  </div>   	         	
   </div>    
-
+   
   <div class="form_row">
 	  <div class="form_title">
 	     課程附件
@@ -270,15 +261,13 @@
 	  </div>
 	  <div class="form_content">
       <%= f.number_field :total_tuition, in: 0..5000000, step: 1 %> NT
-	  </div>         	
-  </div> 
-  <div class="form_row">
+	  </div> 
 	  <div class="form_title">
 	     補助款
 	  </div>
 	  <div class="form_content">
       <%= f.number_field :grants, in: 0..5000000, step: 1 %> NT
-	  </div>  	     	
+	  </div>  	          	
   </div> 
   <div class="form_row">
 	  <div class="form_title">
@@ -294,14 +283,19 @@
 	  </div>    
 	  <div class="form_content" id="income_total">	         
 	  </div>    	     	
-  </div>    
+  </div>       
   <div class="form_row">
 	  <div class="form_sub">
 	     預計經費支出    
 	  </div>    
 	  <div class="form_sub">	         
 	  </div>    	     	
-  </div>       
+  </div>     
+  <div class="form_row">
+	  <div class="form_sub">  
+	  管理
+	  </div>       	     	
+  </div>      
   <div class="form_row">
 	  <div class="form_title">
 	     學校管理費*
@@ -310,17 +304,15 @@
 	  <div class="form_content">
       <%= f.number_field :school_expenses, in: 0..5000000, step: 1 %> NT
       (約佔經費來源  <span id="school_expenses_percent"></span>)       
-	  </div>         	
-  </div>    
-  <div class="form_row">
+	  </div>  
 	  <div class="form_title">
 	     教務處管理費
 	  </div>
 	  <div class="form_content">
       <%= f.number_field :academic_expenses, in: 0..5000000, step: 1 %> NT
       (約佔經費來源  <span id="academic_expenses_percent"></span>)       
-	  </div>         	
-  </div>       
+	  </div>  	         	
+  </div>         
   <div class="form_row">
 	  <div class="form_title">
 	      各中心管理費
@@ -328,17 +320,15 @@
 	  <div class="form_content">
       <%= f.number_field :center_expenses, in: 0..5000000, step: 1 %> NT
       (約佔經費來源  <span id="center_expenses_percent"></span>)       
-	  </div>         	
-  </div>     
-  <div class="form_row">
+	  </div>      
 	  <div class="form_title">
 	      各學院管理費
 	  </div>
 	  <div class="form_content">
       <%= f.number_field :college_expenses, in: 0..5000000, step: 1 %> NT
       (約佔經費來源  <span id="college_expenses_percent"></span>) 
-	  </div>         	
-  </div>   
+	  </div>     	
+  </div>      
   <div class="form_row">
 	  <div class="form_title">
 	      各系所管理費
@@ -348,7 +338,11 @@
       (約佔經費來源  <span id="department_expenses_percent"></span>) 
 	  </div>         	
   </div>   
-  
+  <div class="form_row">
+	  <div class="form_sub">  
+	  場地	
+	  </div>       	     	
+  </div>     
   <div class="form_row">
 	  <div class="form_title">
 	    學校場地費*
@@ -369,7 +363,11 @@
       (約佔場地費<span id="units_venue_fee_percent_in_venue"></span>)           
 	  </div>  	          	
   </div>   
-  
+  <div class="form_row">
+	  <div class="form_sub">  
+	  其他	
+	  </div>       	     	
+  </div>     
   <div class="form_row">
 	  <div class="form_title">
 	     人事費
@@ -377,17 +375,15 @@
 	  <div class="form_content">
       <%= f.number_field :personnel_fee, in: 0..5000000, step: 1 %> NT 
       (約佔經費來源  <span id="personnel_fee_percent"></span>)        
-	  </div>  	          	
-  </div>     
-  <div class="form_row">
+	  </div> 
 	  <div class="form_title">
 	     業務費
 	  </div>
 	  <div class="form_content">
       <%= f.number_field :sales_fee, in: 0..5000000, step: 1 %> NT 
       (約佔經費來源  <span id="sales_fee_percent"></span>)        
-	  </div>  	          	
-  </div> 
+	  </div>  	  	          	
+  </div>     
   <div class="form_row">
 	  <div class="form_title">
 	     差旅費
@@ -395,17 +391,15 @@
 	  <div class="form_content">
       <%= f.number_field :travel_fee, in: 0..5000000, step: 1 %> NT 
       (約佔經費來源  <span id="travel_fee_percent"></span>)        
-	  </div>  	          	
-  </div>   
-   <div class="form_row">
+	  </div>  
 	  <div class="form_title">
 	    設備費
 	  </div>
 	  <div class="form_content">
       <%= f.number_field :facilities_fee, in: 0..5000000, step: 1 %> NT 
       (約佔經費來源  <span id="facilities_fee_percent"></span>)        
-	  </div>  	          	
-  </div>    
+	  </div>	  	          	
+  </div>      
    <div class="form_row">
 	  <div class="form_title">
 	      鐘點費

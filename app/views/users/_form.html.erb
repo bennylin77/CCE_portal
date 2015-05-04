@@ -88,24 +88,7 @@
 	  <%=f.radio_button :gender, "true"%>男
 	  <%=f.radio_button :gender, "false"%>女
 	  </div>         	
-  </div> 
-  <div class="form_row">
-	  <div class="form_title">
-	  出生年月日*
-	  </div>
-	  <div class="form_content">
-      <%= f.date_select :birthday, start_year: Time.now.year - 80, end_year: Time.now.year %>
-	  </div>         	
-  </div>        
-  <div class="form_row">
-	  <div class="form_title">
-	  地址*
-	  </div>
-	  <div class="form_content">
-   	  <%= f.text_field :address, size: 30 %>
-	  </div>         	
   </div>
-  <%if @user.identity!=GLOBAL_VAR['identity_student'] and @user.identity!=GLOBAL_VAR['identity_lecturer']%>
   <div class="form_row">
 	  <div class="form_title">
 	   學校分機*
@@ -113,11 +96,35 @@
 	  <div class="form_content">
    	  <%= f.number_field :extend, in: 0..100000, step: 1  %>
 	  </div>         	
-  </div>     
-  <%end%>  
+  </div>    
   <div class="form_row">
 	  <div class="form_title">
-	     手機號碼*
+	   人事代碼*
+	  </div>
+	  <div class="form_content">
+   	  <%= f.text_field :personnel_code, size: 30 %>
+	  </div>         	
+  </div>  
+  <%if @user.identity==GLOBAL_VAR['identity_student'] or @user.identity==GLOBAL_VAR['identity_lecturer']%>    
+  <div class="form_row">
+	  <div class="form_title">
+	  出生年月日
+	  </div>
+	  <div class="form_content">
+      <%= f.date_select :birthday, start_year: Time.now.year - 80, end_year: Time.now.year %>
+	  </div>         	
+  </div>  
+  <div class="form_row">
+	  <div class="form_title">
+	  地址
+	  </div>
+	  <div class="form_content">
+   	  <%= f.text_field :address, size: 30 %>
+	  </div>         	
+  </div>   
+  <div class="form_row">
+	  <div class="form_title">
+	     手機號碼
 	  </div>
 	  <div class="form_content">
    	  <%= f.text_field :mobile_no, size: 30  %>
@@ -133,7 +140,7 @@
   </div>  
   <div class="form_row">
 	  <div class="form_title">
-	  國籍*
+	  國籍
 	  </div>
 	  <div class="form_content">
       <%= country_select("user", "nationality", {}, { selected: "Taiwan, Republic Of China"})%>
@@ -141,7 +148,7 @@
   </div>
   <div class="form_row">
 	  <div class="form_title">
-	  身分証字號*
+	  身分証字號
 	  </div>
 	  <div class="form_content">
    	  <%= f.text_field :id_no, size: 30 %>
@@ -160,7 +167,7 @@
   </div>
   <div class="form_row">
 	  <div class="form_title">
-	  最高學歷*
+	  最高學歷
 	  </div>
 	  <div class="form_content">
    	  <%= f.text_field :education, size: 30 %>
@@ -181,7 +188,8 @@
 	  <div class="form_content">
    	  <%= f.text_field :emergency_phone_no, size: 30  %>
 	  </div>         	
-  </div>      
+  </div>  
+  <%end%>          
   <div class="form_row">
 	  <div class="form_title">
 	  訂閱最新課程資訊

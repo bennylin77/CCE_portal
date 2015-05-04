@@ -103,6 +103,6 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :extend, :gender, :education, :id_no, :passport_no, :nationality, 
                                    :birthday, :address, :phone_no, :mobile_no, :identity, :pw, :pw_confirmation, :verified, :edm,
-                                   :emergency_name, :emergency_phone_no)
+                                   :emergency_name, :emergency_phone_no, :personnel_code)
     end
 end

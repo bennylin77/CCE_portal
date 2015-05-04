@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
   before_action :authorize, except: [:index, :show]   
-  before_action :set_news, only: [:verified, :show, :edit, :update, :destroy]
+  before_action :set_news, only: [:verified, :show, :showManagement, :edit, :update, :destroy]
   before_action only: [:verified] { |c| c.checkIdentity(no: 1, identity1: GLOBAL_VAR['identity_CCE'])}  
   before_action only: [:indexManagement, :new, :create] { |c| c.checkIdentity(no: 2, identity1: GLOBAL_VAR['identity_CCE'], identity2: GLOBAL_VAR['identity_employee'])}  
   before_action only: [:edit, :update, :destroy] { |c| c.checkUser(id: @news.user.id )} 
@@ -17,6 +17,10 @@ class NewsController < ApplicationController
     end        
   end
 
+  def showManagement
+  
+  end
+  
   def show  
     @news.view=@news.view+1
     @news.save!          
@@ -49,7 +53,7 @@ class NewsController < ApplicationController
     respond_to do |format|
       if @news.update(news_params)
         flash[:title]='消息公告'
-        format.html { redirect_to @news, notice: '編輯成功' }
+        format.html { redirect_to  controller: 'news', action: 'showManagement', id: @news.id }
       else
         format.html { render :edit }
       end
@@ -93,7 +97,7 @@ class NewsController < ApplicationController
     @news.save!
     flash[:title]='消息公告'
     flash[:notice]='成功更改審核狀態'
-    redirect_to controller: :news, action: :indexManagement
+    redirect_to controller: :news, action: :showManagement, id: @news.id
   end
     
   private

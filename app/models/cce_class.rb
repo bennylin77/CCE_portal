@@ -1,5 +1,6 @@
 class CceClass < ActiveRecord::Base
   belongs_to :user  
+  has_many :news, dependent: :destroy  
   has_many :courses, dependent: :destroy
   has_many :cce_class_dimensions, dependent: :destroy
   has_many :dimensions, through: :cce_class_dimensions

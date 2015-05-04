@@ -10,21 +10,24 @@ class User < ActiveRecord::Base
   validates :identity, presence: {message: "會員身份 不能是空白"}
   validates :pw, presence: {message: "密碼 不能是空白"}, confirmation: {message: "密碼 輸入不一致"}, on: :update
   validates :pw_confirmation, presence: {message: "密碼確認 不能是空白"}, on: :update
-  validates :birthday, presence: {message: "出生年月日 不能是空白"}, on: :update  
+  #validates :birthday, presence: {message: "出生年月日 不能是空白"}, on: :update  
   #validates :address, presence: {message: "地址 不能是空白"}, on: :update  
-  validates :education, presence: {message: "最高學歷 不能是空白"}, on: :update  
-  validates :mobile_no, presence: {message: "手機號碼 不能是空白"}, on: :update  
+  #validates :education, presence: {message: "最高學歷 不能是空白"}, on: :update  
+  #validates :mobile_no, presence: {message: "手機號碼 不能是空白"}, on: :update  
 
  
   
   
-  validate  :identityMostWithExtend, on: :update
-  validate  :passportNoOrIdNo, on: :update 
+  validate  :identityMostWithExtendAndPersonnelCode, on: :update
+  #validate  :passportNoOrIdNo, on: :update 
   
-  def identityMostWithExtend
+  def identityMostWithExtendAndPersonnelCode
     if extend.blank? and identity!=GLOBAL_VAR['identity_student'] and identity!=GLOBAL_VAR['identity_lecturer']
       errors.add(:extend, "請填寫學校分機")
     end
+    if personnel_code.blank? and identity!=GLOBAL_VAR['identity_student'] and identity!=GLOBAL_VAR['identity_lecturer']
+      errors.add(:personnel_code, "請填寫人事代碼")
+    end    
   end    
   
   def passportNoOrIdNo 
