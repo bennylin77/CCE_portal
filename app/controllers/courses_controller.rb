@@ -67,6 +67,6 @@ class CoursesController < ApplicationController
       :school_expenses, :academic_expenses, :center_expenses, :college_expenses, :department_expenses, 
       :school_venue_fee, :units_venue_fee, :venue_fee_note, :personnel_fee, :sales_fee, :travel_fee, :facilities_fee, :hourly_fee,
       :no_of_users, :no_of_finished_users, :total_credits, :total_hours,
-      :in_school_lecturers_quantity, :out_school_lecturers_quantity, :in_school_lecturers_hours, :out_school_lecturers_hours)
+      :in_school_lecturers_quantity, :out_school_lecturers_quantity, :in_school_lecturers_hours, :out_school_lecturers_hours, :accounting_year)
     end
 end

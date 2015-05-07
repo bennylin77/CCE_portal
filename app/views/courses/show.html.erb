@@ -8,6 +8,14 @@
 <section class="show_table">
   <div class="show_row">
 	  <div class="show_title">
+	  會計年度
+	  </div>
+	  <div class="show_content">	
+	  	<%= @course.accounting_year%>
+	  </div>	           	
+  </div>	
+  <div class="show_row">
+	  <div class="show_title">
 	  開班名稱
 	  </div>
 	  <div class="show_content">	
@@ -242,7 +250,7 @@
 	  總時數
 	  </div>
 	  <div class="show_content">
-      <%= @course.total_hours %>
+      <%= @course.total_hours %>小時
 	  </div>  	      	
   </div>
   <div class="show_row">
@@ -267,7 +275,7 @@
       <%= @course.in_school_lecturers_hours %>小時
 	  </div> 
 	  <div class="show_title">
-	  校外師資時數* 
+	  校外師資時數
 	  </div>
 	  <div class="show_content">
       <%= @course.out_school_lecturers_hours %>小時

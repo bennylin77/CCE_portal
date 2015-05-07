@@ -49,7 +49,7 @@
   </div>  
   <% cce_class.courses.each do |course| %>
   <div class="index_row"> 	              
-       <div class="index_content">經費處理: <%=course.title%></div>
+       <div class="index_content">經費處理: <%=course.accounting_year%> <%=course.title%></div>
        <div class="index_content">        
        	<%= link_to '詳細', course, class: 'function_sub_button' %>
         </div>  
