@@ -2,7 +2,6 @@
   <% if @course.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
-
       <ul>
       <% @course.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -14,12 +13,304 @@
   <section class="form_table">
   <div class="form_row">
 	  <div class="form_title">
-	  課程名稱*
+	  開班名稱
 	  </div>
 	  <div class="form_content">
-	  <%= f.text_field :title, size: 40 %>	
+	  <%= @course.cce_class.title %>
+	  </div>         	
+  </div>  	 	
+ <div class="form_row">
+	  <div class="form_title">
+	      主辦單位
+	  </div>
+	  <div class="form_content">
+      <%= @course.cce_class.organizer%>
+	  </div>  
+	  <div class="form_title">
+	      主持人
+	  </div>
+	  <div class="form_content">
+      <%= @course.cce_class.host%>
+	  </div> 	         	
+  </div>   
+  <div class="form_row">
+	  <div class="form_title">
+	      承辦人
+	  </div>
+	  <div class="form_content">
+      <%= @course.cce_class.user.name%>
+	  </div>  
+	  <div class="form_title">
+	      承辦人分機
+	  </div>
+	  <div class="form_content">
+      <%= @course.cce_class.user.extend%>
+	  </div> 	           	
+  </div>
+  <div class="form_row">
+	  <div class="form_title">
+	  課程名稱
+	  </div>
+	  <div class="form_content">
+	  <%= f.text_field :title, size: 50 %>	
+	  </div>         	
+  </div>  
+  <div class="form_row">
+	  <div class="form_title">
+	  計畫編號*<br>(請向會計室洽詢)
+	  </div>
+	  <div class="form_content">
+	  <%= f.text_field :code, size: 10 %>	
+	  </div>   	
+	  <div class="form_title">
+	  備註
+	  </div>
+	  <div class="form_content">
+	  <%= f.text_field :note, size: 40 %>	
 	  </div>         	
   </div>
+  <div class="form_row">
+	  <div class="form_sub">
+	     經費來源    
+	  </div>    
+	  <div class="form_sub">	         
+	  </div>    	     	
+  </div>   	
+  <div class="form_row">
+	  <div class="form_title">
+	     預估總共學費*
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :total_tuition, in: 0..5000000, step: 1 %> NT
+	  </div> 
+	  <div class="form_title">
+	     補助款
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :grants, in: 0..5000000, step: 1 %> NT
+	  </div>  	          	
+  </div> 
+  <div class="form_row">
+	  <div class="form_title">
+	     其他經費來源
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :other_funds, in: 0..5000000, step: 1 %> NT
+	  </div> 	
+  </div>       
+  <div class="form_row">
+	  <div class="form_title">
+	     總計來源:    
+	  </div>    
+	  <div class="form_content" id="income_total">	         
+	  </div>    	     	
+  </div>       
+  <div class="form_row">
+	  <div class="form_sub">
+	     經費支出    
+	  </div>    
+	  <div class="form_sub">	         
+	  </div>    	     	
+  </div>     
+  <div class="form_row">
+	  <div class="form_sub">  
+	  管理
+	  </div>       	     	
+  </div>      
+  <div class="form_row">
+	  <div class="form_title">
+	     學校管理費*
+	  <br><span style="font-size: 90%">(學分班為15%)</span>   
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :school_expenses, in: 0..5000000, step: 1 %> NT
+      (約佔經費來源  <span id="school_expenses_percent"></span>)       
+	  </div>  
+	  <div class="form_title">
+	     教務處管理費
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :academic_expenses, in: 0..5000000, step: 1 %> NT
+      (約佔經費來源  <span id="academic_expenses_percent"></span>)       
+	  </div>  	         	
+  </div>         
+  <div class="form_row">
+	  <div class="form_title">
+	      各中心管理費
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :center_expenses, in: 0..5000000, step: 1 %> NT
+      (約佔經費來源  <span id="center_expenses_percent"></span>)       
+	  </div>      
+	  <div class="form_title">
+	      各學院管理費
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :college_expenses, in: 0..5000000, step: 1 %> NT
+      (約佔經費來源  <span id="college_expenses_percent"></span>) 
+	  </div>     	
+  </div>      
+  <div class="form_row">
+	  <div class="form_title">
+	      各系所管理費
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :department_expenses, in: 0..5000000, step: 1 %> NT
+      (約佔經費來源  <span id="department_expenses_percent"></span>) 
+	  </div>         	
+  </div>   
+  <div class="form_row">
+	  <div class="form_sub">  
+	  場地	
+	  </div>       	     	
+  </div>     
+  <div class="form_row">
+	  <div class="form_title">
+	    學校場地費*
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :school_venue_fee, in: 0..5000000, step: 1 %> NT
+      (約佔經費來源  <span id="school_venue_fee_percent"></span>) 
+      (約佔場地費<span id="school_venue_fee_percent_in_venue"></span>)          
+	  </div>         	
+  </div>    
+  <div class="form_row">
+	  <div class="form_title">
+	     各單位場地費*
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :units_venue_fee, in: 0..5000000, step: 1 %> NT 
+      (約佔經費來源  <span id="units_venue_fee_percent"></span>) 
+      (約佔場地費<span id="units_venue_fee_percent_in_venue"></span>)           
+	  </div>  	          	
+  </div>   
+  <div class="form_row">
+	  <div class="form_title">
+	  場地費分配及<br>使用時數說明：
+	  </div>
+	  <div class="form_content">
+      <%= f.text_area :venue_fee_note, size: '30x2' %> 
+       
+	  </div>  	          	
+  </div>   
+  <div class="form_row">
+	  <div class="form_sub">  
+	  其他	
+	  </div>       	     	
+  </div>     
+  <div class="form_row">
+	  <div class="form_title">
+	     人事費
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :personnel_fee, in: 0..5000000, step: 1 %> NT 
+      (約佔經費來源  <span id="personnel_fee_percent"></span>)        
+	  </div> 
+	  <div class="form_title">
+	     業務費
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :sales_fee, in: 0..5000000, step: 1 %> NT 
+      (約佔經費來源  <span id="sales_fee_percent"></span>)        
+	  </div>  	  	          	
+  </div>     
+  <div class="form_row">
+	  <div class="form_title">
+	     差旅費
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :travel_fee, in: 0..5000000, step: 1 %> NT 
+      (約佔經費來源  <span id="travel_fee_percent"></span>)        
+	  </div>  
+	  <div class="form_title">
+	    設備費
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :facilities_fee, in: 0..5000000, step: 1 %> NT 
+      (約佔經費來源  <span id="facilities_fee_percent"></span>)        
+	  </div>	  	          	
+  </div>      
+   <div class="form_row">
+	  <div class="form_title">
+	      鐘點費
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :hourly_fee, in: 0..5000000, step: 1 %> NT 
+      (約佔經費來源  <span id="hourly_fee_percent"></span>)        
+	  </div>  	          	
+  </div> 
+    
+  <div class="form_row">
+	  <div class="form_title">
+	     總計支出:    
+	  </div>    
+	  <div class="form_content" id="expenses_total">	         
+	  </div>    	     	
+  </div>  
+  <div class="form_row">
+	  <div class="form_sub">  
+	  實際人次/學分	
+	  </div>  
+	  <div class="form_sub">  
+	  </div> 	       	     	
+  </div>   
+  <div class="form_row">
+	  <div class="form_title">
+	  實際培訓人次*
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :no_of_users, in: 0..500, step: 1 %>人
+	  </div>  
+	  <div class="form_title">
+	  實際上課(結業)人次*
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :no_of_finished_users, in: 0..500, step: 1 %>人
+	  </div>   	        	
+  </div>  
+  <div class="form_row">
+	  <div class="form_title">
+	  總學分
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :total_credits, in: 0..100, step: 1 %>
+	  </div>   
+	  <div class="form_title">
+	  總時數
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :total_hours, in: 0..100, step: 1 %>
+	  </div> 	       	
+  </div>
+  <div class="form_row">
+	  <div class="form_title">
+	  校內師資人數* 
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :in_school_lecturers_quantity, in: 0..50, step: 1 %>人
+	  </div> 
+	  <div class="form_title">
+	  校內師資人數* 
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :out_school_lecturers_quantity, in: 0..50, step: 1 %>人
+	  </div>  	         	
+  </div>  
+  <div class="form_row">
+	  <div class="form_title">
+	  校內師資時數* 
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :in_school_lecturers_hours, in: 0..500, step: 1 %>小時
+	  </div> 
+	  <div class="form_title">
+	  校內師資時數* 
+	  </div>
+	  <div class="form_content">
+      <%= f.number_field :out_school_lecturers_hours, in: 0..500, step: 1 %>小時
+	  </div>        	
+  </div>           
+
   <div class="form_row">
   	<div class="form_title">
     <%= f.button '確認送出' %>
@@ -27,3 +318,99 @@
   </div>   
   </section>	 
 <% end %>
+<script>
+	$('#income_total').html( incomeTotal()+' NT' );
+	expensesCal();
+	
+	function incomeTotal()
+	{
+		return (parseInt($("#course_grants" ).val()) || 0)+ (parseInt($("#course_total_tuition" ).val()) || 0)+(parseInt($("#course_other_funds" ).val()) || 0); 	
+	}
+	function expensesCal()
+	{
+		$( "#school_expenses_percent" ).html( (((parseInt($("#course_school_expenses" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );
+		$( "#academic_expenses_percent" ).html( (((parseInt($("#course_academic_expenses" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );
+		$( "#center_expenses_percent" ).html( (((parseInt($("#course_center_expenses" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );		
+		$( "#college_expenses_percent" ).html( (((parseInt($("#course_college_expenses" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );		
+		$( "#department_expenses_percent" ).html( (((parseInt($("#course_department_expenses" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );
+		$( "#school_venue_fee_percent" ).html( (((parseInt($("#course_school_venue_fee" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );
+		$( "#school_venue_fee_percent_in_venue" ).html(  (((parseInt($("#course_school_venue_fee" ).val()) || 0)  /  
+		                                                 ((parseInt($("#course_units_venue_fee" ).val()) || 0)  + 
+		                                                  (parseInt($("#course_school_venue_fee" ).val()) || 0)))*100).toFixed(2)+'%' );			
+		$( "#units_venue_fee_percent" ).html( (((parseInt($("#course_units_venue_fee" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );
+		$( "#units_venue_fee_percent_in_venue" ).html(  (((parseInt($("#course_units_venue_fee" ).val()) || 0)  /  
+		                                                 ((parseInt($("#course_units_venue_fee" ).val()) || 0)  + 
+		                                                  (parseInt($("#course_school_venue_fee" ).val()) || 0)))*100).toFixed(2)+'%' );			                                                  
+		
+		$( "#personnel_fee_percent" ).html( (((parseInt($("#course_personnel_fee" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );
+		$( "#sales_fee_percent" ).html( (((parseInt($("#course_sales_fee" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );
+		$( "#travel_fee_percent" ).html( (((parseInt($("#course_travel_fee" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );
+		$( "#facilities_fee_percent" ).html( (((parseInt($("#course_facilities_fee" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );
+		$( "#hourly_fee_percent" ).html( (((parseInt($("#course_hourly_fee" ).val()) || 0)/incomeTotal())*100).toFixed(2)+'%'  );
+		
+		
+		$( "#expenses_total" ).html( (parseInt($("#course_school_expenses" ).val()) || 0)+
+									 (parseInt($("#course_academic_expenses" ).val()) || 0)+
+									 (parseInt($("#course_center_expenses" ).val()) || 0)+
+									 (parseInt($("#course_college_expenses" ).val()) || 0)+
+									 (parseInt($("#course_department_expenses" ).val()) || 0)+
+									 (parseInt($("#course_units_venue_fee" ).val()) || 0)  + 
+		                             (parseInt($("#course_personnel_fee" ).val()) || 0)+
+		                             (parseInt($("#course_school_venue_fee" ).val()) || 0)+		                             
+		                             (parseInt($("#course_sales_fee" ).val()) || 0)+
+		                             (parseInt($("#course_travel_fee" ).val()) || 0)+
+		                             (parseInt($("#course_facilities_fee" ).val()) || 0)+
+									 (parseInt($("#course_hourly_fee" ).val()) || 0)+		                             
+		                             ' NT'
+		 );
+	}	
+	$( "#course_total_tuition" ).change(function() {
+		 $('#income_total').html( incomeTotal()+' NT' );  
+		 expensesCal();
+	});	
+	$( "#course_grants" ).change(function() { 
+		 $('#income_total').html( incomeTotal()+' NT' ); 
+		 expensesCal();
+	});	
+	$( "#course_other_funds" ).change(function() { 
+		 $('#income_total').html( incomeTotal()+' NT' ); 
+		 expensesCal();
+	});	
+	
+	$( "#course_school_expenses" ).change(function() {
+		 expensesCal();
+	});		
+	$( "#course_academic_expenses" ).change(function() {
+		 expensesCal();
+	});	
+	$( "#course_center_expenses" ).change(function() {
+		 expensesCal();
+	});
+	$( "#course_college_expenses" ).change(function() {
+		 expensesCal();
+	});
+	$( "#course_department_expenses" ).change(function() {
+		 expensesCal();
+	});
+	$( "#course_school_venue_fee" ).change(function() {
+		 expensesCal();
+	});
+	$( "#course_units_venue_fee" ).change(function() {
+		 expensesCal();
+	});		
+	$( "#course_personnel_fee" ).change(function() {
+		 expensesCal();
+	});	
+	$( "#course_sales_fee" ).change(function() {
+		 expensesCal();
+	});	
+	$( "#course_travel_fee" ).change(function() {
+		 expensesCal();
+	});	
+	$( "#course_facilities_fee" ).change(function() {
+		 expensesCal();
+	});	
+	$( "#course_hourly_fee" ).change(function() {
+		 expensesCal();
+	});									
+</script>

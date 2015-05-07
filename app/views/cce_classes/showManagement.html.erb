@@ -6,7 +6,6 @@
 	        <%unless User.find(session[:user_id]).identity!=GLOBAL_VAR['identity_CCE'] %>
 	        <%= link_to '取消通過', {controller: :cce_classes, action: :verified, id: @cce_class.id }, class: 'function_button' %>
 	        <%end%>
-        	<%= link_to '新增經費處理表', {controller: :courses, action: :new, cce_class_id: @cce_class.id} , class: 'function_button' %>        
        		<%= link_to '續開相同課程', {controller: :cce_classes, action: :new, id: @cce_class.id}, class: 'function_button' %>        
         <%else%>
 	        <%unless User.find(session[:user_id]).identity!=GLOBAL_VAR['identity_CCE'] %>
@@ -410,9 +409,7 @@
 	  <%= @cce_class.hourly_fee%> NT
 	  (約佔經費來源  <%= ((@cce_class.hourly_fee.to_f/(@cce_class.total_tuition+@cce_class.grants.to_i+@cce_class.other_funds.to_i))*100).round(2) %>%)  			  	
 	  </div>         	
-  </div>         
-  
-  
+  </div>           
   <div class="show_row">
 	  <div class="show_title">
 	  	 總計支出

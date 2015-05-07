@@ -88,6 +88,16 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'file_bell';
+  src:asset-url('icons/file_bell.eot');
+  src:asset-url('icons/file_bell.eot?#iefix') format('embedded-opentype'),
+    asset-url('icons/file_bell.woff') format('woff'),
+    asset-url('icons/file_bell.ttf') format('truetype'),
+    asset-url('icons/file_bell.svg#file_bell') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 .icon-stack:before {
 	content: "\e600";
 }
@@ -141,6 +151,12 @@
 }
 .icon-attachment:before {
   content: "\e618";
+}
+.icon-file:before {
+  content: "\e922";
+}
+.icon-bell:before {
+  content: "\e951";
 }
 .course_news-icon:before {
     font-family: "course_news";
@@ -217,6 +233,15 @@
 }
 .link_attachment:before{
   font-family: "link_attachment";
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  font-size: 100%;   
+}
+.file_bell-icon:before{
+  font-family: "file_bell";
     font-style: normal;
     font-weight: normal;
     font-variant: normal;

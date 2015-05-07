@@ -226,7 +226,7 @@ button{
 	left: 13px;
 	bottom: 25px;
 	width: 195.5px;
-	height: 100px;
+	height: 170px;
 	border: 4px solid #F2EEEA	
 }
 .bot_container ul{
@@ -257,7 +257,7 @@ button{
 }
 .bot_container li .bot_container_CH{
 	letter-spacing: 5px;
-	font-size: 10px;
+	font-size: 11px;
 }
 .bot_line{
 	position: fixed;
@@ -695,6 +695,9 @@ button{
 	border-radius: 3px;
 	border: 1px solid #DADADA;
 }
+.cce_box:hover{
+	opacity:  0.8;
+}
 .cce_box_title{
 	width: 80%;
 	color: #F2EEEA;	
@@ -756,6 +759,10 @@ button{
   	background: #198EB9;
 	margin: 10px auto 10px;	
 }
+.news_box:hover{
+	opacity:  0.8;
+}
+
 .news_box_title{
     font-family: Microsoft YaHei, 'Lato', Calibri, Arial, sans-serif;	
 	width: 89%;

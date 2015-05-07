@@ -12,4 +12,12 @@ class MainController < ApplicationController
   def CCELocation
   end       
 
+  def CCEStudents
+  end
+  
+  def CCELinks
+  end 
+  
+  def CCESurvey
+  end
 end

@@ -1,0 +1,256 @@
+<div class="function_field">
+<%= link_to '回此經費處理表', {controller: :courses, action: :show, id: @course.id }, class: 'function_button' %>
+<%= link_to '列印此單', "", onclick: "PrintElem('#printdiv')", class: 'function_button' %>	
+</div>
+
+<script type="text/javascript">
+function PrintElem(elem)
+{
+	Popup($(elem).html());
+}
+function Popup(data)
+{
+	var mywindow = window.open('', '國立交通大學推廣教育課程經費處理表', 'height=297mm, width=210mm');
+	mywindow.document.write('<html><head><title>國立交通大學推廣教育課程經費處理表</title>');
+	/*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+	mywindow.document.write('</head><body >');
+	mywindow.document.write(data);
+	mywindow.document.write('</body></html>');
+	mywindow.document.close(); //prevent IE error
+	mywindow.focus(); //prevent IE error
+	mywindow.print();
+	mywindow.close();
+	return true;
+}
+</script>
+<div id="printdiv">
+<style>
+table {
+    width: 210mm;
+    border: 1px solid;
+}
+
+th {
+    height: 7mm;
+    width: 30mm;
+} 
+td {
+    height: 7mm;
+    width: 40mm;
+    border-bottom: 1px solid;
+} 
+</style>
+<div style="text-align: center; width: 210mm;">國立交通大學推廣教育課程經費處理表</div>
+<table>	
+  <tr>
+    <th>開班名稱</th>
+    <td colspan="3"><%= showBlank( data: @course.cce_class.title)%></td>
+  </tr>
+  <tr>
+    <th>課程名稱</th>
+    <td><%= showBlank( data: @course.cce_class.title)%></td>
+  </tr>    
+  <tr>
+    <th>計畫編號</th>
+    <td><%= showBlank( data: @course.code )%></td>
+    <th>備註</th>
+    <td><%= showBlank( data: @course.note )%></td>        
+  </tr>
+  <tr>
+    <th>課程學年</th>
+    <td><%=  @course.cce_class.school_year %></td>       
+  </tr>  
+  <tr>
+    <th>課程開始日</th>
+    <td><%=  @course.cce_class.start_at %></td>
+    <th>課程結束日</th>
+    <td><%=  @course.cce_class.end_at %></td>        
+  </tr>        
+  <tr>
+    <th>主辦單位</th>
+    <td><%= @course.cce_class.organizer%></td>    
+    <th>主持人</th>
+    <td><%= @course.cce_class.host%></td>    
+  </tr>             
+  <tr>
+    <th>承辦人</th>
+    <td><%= @course.cce_class.user.name%></td> 
+    <th>承辦人分機</th>
+    <td>#<%= @course.cce_class.user.extend%></td>    
+  </tr>                     
+  <tr>
+    <th>經費來源:</th>
+  </tr>   
+  <tr>
+    <th>總共學費</th>
+    <td><%= @course.total_tuition || 0%> NT</td>    
+    <th>補助款</th>
+    <td><%= @course.grants || 0%> NT</td>        
+  </tr> 
+  <tr>
+    <th>其他經費來源</th>
+    <td colspan="3"><%= @course.other_funds || 0%> NT</td>    
+  </tr>   
+  <tr>
+    <th>總計來源</th>
+    <td colspan="3"><%= @course.total_tuition+@course.grants.to_i+@course.other_funds.to_i %> NT</td>    
+  </tr> 
+  <tr>
+    <th>經費支出:</th>
+  </tr>  
+  <tr>
+    <th>學校(學分班為15%)</th>
+    <td>
+    	<%= @course.school_expenses || 0%> NT
+		(約佔經費來源  <%= ((@course.school_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)      
+    </td>    
+    <th>教務處</th>
+    <td>
+      <%= @course.academic_expenses || 0%> NT	
+	  (約佔經費來源  <%= ((@course.academic_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)
+	</td>        
+  </tr>
+  <tr>
+    <th>各中心</th>
+    <td>
+	  <%= @course.center_expenses || 0%> NT
+	  (約佔經費來源  <%= ((@course.center_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	    	
+    </td>    
+    <th>各學院</th>
+    <td>
+	  <%= @course.college_expenses || 0%> NT	
+	  (約佔經費來源  <%= ((@course.college_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	      
+    </td>        
+  </tr>
+  <tr>
+    <th>各系所</th>
+    <td>
+	  <%= @course.department_expenses || 0%> NT
+	  (約佔經費來源  <%= ((@course.department_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+    </td>           
+  </tr>    
+  <tr>
+    <th>學校場地費</th>
+    <td>
+	  <%= @course.school_venue_fee || 0%> NT	
+	  (約佔經費來源  <%= ((@course.school_venue_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  		  
+	  (約佔場地費 <%= ((@course.school_venue_fee.to_f/(@course.school_venue_fee+@course.units_venue_fee))*100).round(2) %>%)  			  		      
+    </td>    
+    <th>各單位場地費</th>
+    <td>
+	  <%= @course.units_venue_fee || 0%> NT
+	  (約佔經費來源  <%= ((@course.units_venue_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+	  (約佔場地費 <%= ((@course.units_venue_fee.to_f/(@course.school_venue_fee+@course.units_venue_fee))*100).round(2) %>%)  			  	  	   
+    </td>        
+  </tr>
+  <tr>
+    <th>場地費分配及<br>使用時數說明：</th>
+    <td colspan="3">
+      <%= @course.venue_fee_note %> 
+    </td>           
+  </tr>
+  <tr>
+    <th>人事費</th>
+    <td>
+	  <%= @course.personnel_fee || 0%> NT
+	  (約佔經費來源  <%= ((@course.personnel_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  		  
+    </td>    
+    <th>業務費</th>
+    <td>
+	  <%= @course.sales_fee || 0%> NT
+	  (約佔經費來源  <%= ((@course.sales_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+    </td>        
+  </tr> 
+  <tr>
+    <th>差旅費</th>
+    <td>
+	  <%= @course.travel_fee || 0%> NT
+	  (約佔經費來源  <%= ((@course.travel_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+    </td>    
+    <th>設備費</th>
+    <td>
+	  <%= @course.sales_fee || 0%> NT
+	  (約佔經費來源  <%= ((@course.facilities_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+    </td>        
+  </tr> 
+  <tr>
+    <th>鐘點費</th>
+    <td>
+	  <%= @course.hourly_fee%> NT
+	  (約佔經費來源  <%= ((@course.hourly_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+    </td>          
+  </tr> 
+  <tr>
+    <th>總計支出</th>
+    <td colspan="3">
+	  <%=@course.school_expenses+@course.academic_expenses+@course.center_expenses+
+	  @course.college_expenses+@course.department_expenses+@course.school_venue_fee+
+	  @course.units_venue_fee+@course.personnel_fee+@course.sales_fee+@course.travel_fee+
+	  @course.facilities_fee+@course.hourly_fee%> NT	
+    </td>          
+  </tr>  
+  <tr>
+    <th>實際人次/學分:</th>
+  </tr>     
+  <tr>
+    <th>實際培訓人次</th>
+    <td><%= @course.no_of_users%> 人</td> 
+    <th>實際上課(結業)人次</th>
+    <td><%= @course.no_of_finished_users%> 人</td>    
+  </tr>       
+  <tr>
+    <th>總學分</th>
+    <td><%= @course.total_credits %></td>    
+    <th>總時數</th>
+    <td><%= @course.total_hours %></td>     
+  </tr>  
+  <tr>
+    <th>校內師資人數</th>
+    <td><%= @course.in_school_lecturers_quantity%> 人</td> 
+    <th>校外師資人數</th>
+    <td><%= @course.out_school_lecturers_quantity%> 人</td>    
+  </tr>    
+  <tr>
+    <th>校內師資時數</th>
+    <td><%= @course.in_school_lecturers_hours%> 小時</td> 
+    <th>校外師資時數</th>
+    <td><%= @course.out_school_lecturers_hours%> 小時</td>    
+  </tr> 
+  <tr>
+    <th>F. 會簽有關單位:</th>
+  </tr>    
+  <tr>
+    <th>承辦單位</th>
+	<th>會簽及意見</th>
+	<th>會辦單位</th>
+	<th>會簽及意見</th>
+  </tr>  
+  <tr>
+    <th style="height: 15mm;">1. 承辦人</th>
+	<td></td>
+	<th>5. 推廣教育中心</th>
+	<td></td>
+  </tr>  
+  <tr>
+    <th style="height: 15mm;">2. 主持人</th>
+	<td></td>
+	<th>6. 教務處</th>
+	<td></td>
+  </tr>            
+  <tr>
+    <th style="height: 15mm;">3. 系所/中心</th>
+	<td></td>
+	<th>7. 主計室</th>
+	<td></td>
+  </tr> 
+  <tr>
+    <th style="height: 15mm;">4. 學院</th>
+	<td></td>
+	<th>8. 校長/授權代簽人</th>
+	<td></td>
+  </tr>    
+  <tr>
+	<td colspan="4" style="font-size: 10px">＊請附上經費預算表連同本表經會簽各相關單位後，正本存會計室，複印本送推教中心、主辦單位、學院、系所／中心。 </td>
+  </tr>    
+</table>	
+</div>

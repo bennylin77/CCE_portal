@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150504054435) do
+ActiveRecord::Schema.define(version: 20150504071135) do
 
   create_table "cce_class_dimensions", force: true do |t|
     t.integer  "cce_class_id"
@@ -87,6 +87,32 @@ ActiveRecord::Schema.define(version: 20150504054435) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "note"
+    t.string   "code"
+    t.integer  "grants"
+    t.integer  "total_tuition"
+    t.integer  "other_funds"
+    t.integer  "school_expenses"
+    t.integer  "academic_expenses"
+    t.integer  "center_expenses"
+    t.integer  "college_expenses"
+    t.integer  "department_expenses"
+    t.integer  "school_venue_fee"
+    t.integer  "units_venue_fee"
+    t.text     "venue_fee_note"
+    t.integer  "personnel_fee"
+    t.integer  "sales_fee"
+    t.integer  "travel_fee"
+    t.integer  "facilities_fee"
+    t.integer  "hourly_fee"
+    t.integer  "no_of_users"
+    t.integer  "no_of_finished_users"
+    t.integer  "total_credits"
+    t.integer  "total_hours"
+    t.integer  "in_school_lecturers_quantity"
+    t.integer  "out_school_lecturers_quantity"
+    t.integer  "in_school_lecturers_hours"
+    t.integer  "out_school_lecturers_hours"
   end
 
   add_index "courses", ["cce_class_id"], name: "index_courses_on_cce_class_id", using: :btree

@@ -1,23 +1,279 @@
-<div class="function_title">子課程</div>
+<div class="function_title">經費處理表</div>
 <div class="function_field">
 <%= link_to '回推廣教育課程列表', { controller: 'cce_classes', action: 'indexManagement' }, class: 'function_button' %>
+<%= link_to '編輯', edit_course_path(@course), class: 'function_button' %>
+<%= link_to '產生會簽單', { controller: 'courses', action: 'signsheet', id: @course.id  }, class: 'function_button' %>  
+<%= link_to '刪除', @course, method: :delete, class: 'function_del_button', data: { confirm: '您確定要刪除 '+@course.title+' ?' } %>
 </div>
 <section class="show_table">
   <div class="show_row">
 	  <div class="show_title">
-	  	相關推廣教育課程
+	  開班名稱
 	  </div>
 	  <div class="show_content">	
 	  	<%= @course.cce_class.title%>
+	  </div>
+	  <div class="show_title">
+	  課程名稱
+	  </div>
+	  <div class="show_content">	
+	  	<%= @course.title %>
+	  </div>   	           	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  計畫編號
+	  </div>
+	  <div class="show_content">	
+	  <%= @course.code %>
+	  </div>  
+	  <div class="show_title">
+	  備註
+	  </div>
+	  <div class="show_content">	
+	  <%= @course.note %>	
+	  </div>   	         	
+  </div>  
+  <div class="show_row">
+	  <div class="show_sub">
+	  	經費來源    
+	  </div>
+	  <div class="show_sub">	
+	  </div>    
+	  <div class="show_sub">	
+	  </div>  	       	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  	總共學費
+	  </div>
+	  <div class="show_content">
+	  	<%= @course.total_tuition%> NT	
+	  </div>   
+	  <div class="show_title">
+	  	補助款
+	  </div>
+	  <div class="show_content">
+	  	<%= @course.grants%> NT		
+	  </div> 
+	  <div class="show_title">
+	  	其他經費來源
+	  </div>
+	  <div class="show_content">
+	  	<%= @course.other_funds%> NT		
+	  </div>  	  	        	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  	總計來源
+	  </div>
+	  <div class="show_content">
+	  	<%=@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i %> NT	
+	  </div>         	
+  </div>
+  <div class="show_row">
+	  <div class="show_sub">
+	  	經費支出     
+	  </div>
+	  <div class="show_sub">	
+	  </div>    
+	  <div class="show_sub">	
+	  </div>  	       	
+  </div>  
+  <div class="show_row">
+	  <div class="show_title">
+	  	學校(學分班為15%)
+	  </div>
+	  <div class="show_content">
+	  <%= @course.school_expenses%> NT
+	  (約佔經費來源  <%= ((@course.school_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  		
 	  </div>         	
   </div>
   <div class="show_row">
 	  <div class="show_title">
-	  	名稱
+	  	教務處  
 	  </div>
-	  <div class="show_content">	
-	  	<%= @course.title %>
+	  <div class="show_content">
+	  <%= @course.academic_expenses%> NT	
+	  (約佔經費來源  <%= ((@course.academic_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  
 	  </div>         	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  	各中心  
+	  </div>
+	  <div class="show_content">
+	  <%= @course.center_expenses%> NT
+	  (約佔經費來源  <%= ((@course.center_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+	  </div>         	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  	各學院   
+	  </div>
+	  <div class="show_content">
+	  <%= @course.college_expenses%> NT	
+	  (約佔經費來源  <%= ((@course.college_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  
+	  </div>         	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  	各系所 
+	  </div>
+	  <div class="show_content">
+	  <%= @course.department_expenses%> NT
+	  (約佔經費來源  <%= ((@course.department_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+	  </div>         	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  	學校場地費
+	  </div>
+	  <div class="show_content">
+	  <%= @course.school_venue_fee%> NT	
+	  (約佔經費來源  <%= ((@course.school_venue_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  		  
+	  (約佔場地費 <%= ((@course.school_venue_fee.to_f/(@course.school_venue_fee+@course.units_venue_fee))*100).round(2) %>%)  			  		  
+	  </div>         	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  	各單位場地費   
+	  </div>
+	  <div class="show_content">
+	  <%= @course.units_venue_fee%> NT
+	  (約佔經費來源  <%= ((@course.units_venue_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+	  (約佔場地費 <%= ((@course.units_venue_fee.to_f/(@course.school_venue_fee+@course.units_venue_fee))*100).round(2) %>%)  			  	  	
+	  </div>         	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  場地費分配及<br>使用時數說明：
+	  </div>
+	  <div class="show_content">
+      <%= @course.venue_fee_note %> 
+       
+	  </div>  	          	
   </div>  
+  <div class="show_row">
+	  <div class="show_title">
+	     人事費
+	  </div>
+	  <div class="show_content">
+	  <%= @course.personnel_fee%> NT
+	  (約佔經費來源  <%= ((@course.personnel_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+	  </div>         	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	     業務費   
+	  </div>
+	  <div class="show_content">
+	  <%= @course.sales_fee%> NT
+	  (約佔經費來源  <%= ((@course.sales_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+	  </div>         	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  	差旅費 
+	  </div>
+	  <div class="show_content">
+	  <%= @course.travel_fee%> NT
+	  (約佔經費來源  <%= ((@course.travel_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+	  </div>         	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  	設備費   
+	  </div>
+	  <div class="show_content">
+	  <%= @course.facilities_fee%> NT
+	  (約佔經費來源  <%= ((@course.facilities_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+	  </div>         	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	     鐘點費   
+	  </div>
+	  <div class="show_content">
+	  <%= @course.hourly_fee%> NT
+	  (約佔經費來源  <%= ((@course.hourly_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
+	  </div>         	
+  </div>    
+  <div class="show_row">
+	  <div class="show_title">
+	  	 總計支出
+	  </div>
+	  <div class="show_content">
+	  <%=@course.school_expenses+@course.academic_expenses+@course.center_expenses+
+	  @course.college_expenses+@course.department_expenses+@course.school_venue_fee+
+	  @course.units_venue_fee+@course.personnel_fee+@course.sales_fee+@course.travel_fee+
+	  @course.facilities_fee+@course.hourly_fee%> NT	
+	  </div>         	
+  </div>   
+<div class="show_row">
+	  <div class="show_sub">  
+	  實際人次/學分	
+	  </div>  
+	  <div class="show_sub">  
+	  </div> 	       	     	
+  </div>   
+  <div class="show_row">
+	  <div class="show_title">
+	  實際培訓人次
+	  </div>
+	  <div class="show_content">
+      <%= @course.no_of_users %>人
+	  </div>  
+	  <div class="show_title">
+	  實際上課(結業)人次
+	  </div>
+	  <div class="show_content">
+      <%= @course.no_of_finished_users %>人
+	  </div>   	        	
+  </div>  
+  <div class="show_row">
+	  <div class="show_title">
+	  總學分
+	  </div>
+	  <div class="show_content">
+      <%= @course.total_credits %>
+	  </div>    
+	  <div class="show_title">
+	  總時數
+	  </div>
+	  <div class="show_content">
+      <%= @course.total_hours %>
+	  </div>  	      	
+  </div>
+  <div class="show_row">
+	  <div class="show_title">
+	  校內師資人數
+	  </div>
+	  <div class="show_content">
+      <%= @course.in_school_lecturers_quantity %>人
+	  </div> 
+	  <div class="show_title">
+	  校外師資人數
+	  </div>
+	  <div class="show_content">
+      <%= @course.out_school_lecturers_quantity %>人
+	  </div>  	         	
+  </div>  
+  <div class="show_row">
+	  <div class="show_title">
+	  校內師資時數
+	  </div>
+	  <div class="show_content">
+      <%= @course.in_school_lecturers_hours %>小時
+	  </div> 
+	  <div class="show_title">
+	  校外師資時數* 
+	  </div>
+	  <div class="show_content">
+      <%= @course.out_school_lecturers_hours %>小時
+	  </div>        	
+  </div>   
 </section>
-
+<br>
+<br>
+<br>
