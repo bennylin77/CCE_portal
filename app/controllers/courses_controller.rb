@@ -56,6 +56,22 @@ class CoursesController < ApplicationController
     end
   end
 
+  def export
+  end  
+
+  def exportXLS
+    @courses =  Course.where(accounting_year: params[:accounting_year])
+
+    #@vaccounts = @sys_module.groups.map{|g| g.items.map{|i| i.progresses.map{|p| p.vaccount}}}.flatten.compact
+  
+    respond_to do |format|
+       format.xls{
+        response.headers['Content-Type'] = "application/vnd.ms-excel"
+        response.headers['Content-Disposition'] = " attachment; filename=\"export.xls\" " 
+       }
+    end   
+  end  
+
   private
   
     def set_course

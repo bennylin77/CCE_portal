@@ -49,7 +49,7 @@
 				<%else%>
 				<div style="float: left; font-size: 26px;" class="management-icon icon-management"></div><div class="title_container_left_content">消息公告管理NEWS MNGEMT</div>				
 				<%end%>							
-			<%elsif params[:controller]=='cce_classes'%>
+			<%elsif params[:controller]=='cce_classes' or params[:controller]=='courses'%>
 				<%if params[:action]=='index' or params[:action]=='search'%>
 				<div style="float: left; font-size: 26px;" class="course_news-icon icon-stack"></div><div class="title_container_left_content">推廣教育課程COURSES</div>								
 				<%else%>

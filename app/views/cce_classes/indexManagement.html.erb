@@ -5,6 +5,7 @@
 <%end%>
 <%unless User.find(session[:user_id]).identity!=GLOBAL_VAR['identity_CCE'] %>
 <%= link_to '課程分類列表', dimensions_path, class: 'function_button' %>	
+<%= link_to '匯出經費處理表', {controller: 'courses' , action: 'export' }, class: 'function_button' %>	
 <%end%>
 </div>
 <section class="index_table">

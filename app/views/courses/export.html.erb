@@ -1,0 +1,15 @@
+<div class="function_field">
+<%= link_to '回推廣教育課程列表', { controller: 'cce_classes', action: 'indexManagement' }, class: 'function_button' %>
+</div>
+
+<%= form_tag '/courses/exportXLS.xls', method: 'get' do %>
+<%= select_tag :accounting_year, options_for_select([[(Time.now.year-1914).to_s+'上', (Time.now.year-1914).to_s+'上'], 
+	 											[(Time.now.year-1914).to_s+'下', (Time.now.year-1914).to_s+'下'],
+												[(Time.now.year-1913).to_s+'上', (Time.now.year-1913).to_s+'上'], 
+	 											[(Time.now.year-1913).to_s+'下', (Time.now.year-1913).to_s+'下'],
+	  											[(Time.now.year-1912).to_s+'上', (Time.now.year-1912).to_s+'上'],
+	  											[(Time.now.year-1912).to_s+'下', (Time.now.year-1912).to_s+'下'],
+	 											[(Time.now.year-1911).to_s+'上', (Time.now.year-1911).to_s+'上'],
+	  											[(Time.now.year-1911).to_s+'下', (Time.now.year-1911).to_s+'下']])%>
+<%= submit_tag "匯出"  %>
+<% end %>	
