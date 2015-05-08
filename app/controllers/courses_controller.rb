@@ -23,7 +23,7 @@ class CoursesController < ApplicationController
     if @course.save
       flash[:title]='經費處理表' 
       flash[:notice]='成功建立經費處理表'
-      redirect_to controller: :cce_classes, action: :indexManagement
+      redirect_to @course
     else
       render :new
     end

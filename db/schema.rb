@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507090425) do
+ActiveRecord::Schema.define(version: 20150508065516) do
 
   create_table "cce_class_dimensions", force: true do |t|
     t.integer  "cce_class_id"
@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 20150507090425) do
     t.boolean  "edm",                default: true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "personnel_code"
+    t.string   "personnel_code",     default: "0000"
   end
 
 end
