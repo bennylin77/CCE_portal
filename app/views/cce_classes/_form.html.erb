@@ -56,7 +56,7 @@
 	     課程學年*
 	  </div>
 	  <div class="form_content">
-	  <%= f.number_field  :school_year, in: 100..140, step: 1, value: Time.now.year-1911 %>	  	
+	  <%= f.number_field  :school_year, in: 100..180, step: 1, value: Time.now.year-1911 %>	  	
 	  </div>         	
   </div>      
   <div class="form_row">
@@ -78,13 +78,13 @@
 	      課程總時數*
 	  </div>
 	  <div class="form_content">
-  	  <%= f.number_field :total_hours, in: 0..15000, step: 1 %>
+  	  <%= f.number_field :total_hours, in: 0..500000, step: 1 %>
 	  </div>  
 	  <div class="form_title">
 	     課程總學分
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :total_credits, in: 0..15000, step: 1 %>	  	
+      <%= f.number_field :total_credits, in: 0..500000, step: 1 %>	  	
 	  </div> 	         	
   </div>        
   <div class="form_row">
@@ -134,7 +134,7 @@
 	     招生人數*
 	  </div>
 	  <div class="form_content">
-       <%= f.number_field :user_size_limits, in: 0..1000, step: 1 %>
+       <%= f.number_field :user_size_limits, in: 0..500000, step: 1 %>
 	  </div>         	
   </div>      
   <div class="form_row">
@@ -158,13 +158,13 @@
 	     校內師資人數*
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :in_school_lecturers_quantity, in: 0..1000, step: 1 %>
+      <%= f.number_field :in_school_lecturers_quantity, in: 0..50000, step: 1 %>
 	  </div>     
 	  <div class="form_title">
 	     校外師資人數*
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :out_school_lecturers_quantity, in: 0..1000, step: 1  %>
+      <%= f.number_field :out_school_lecturers_quantity, in: 0..50000, step: 1  %>
 	  </div>	      	      	
   </div>      
   <div class="form_row">
@@ -202,7 +202,7 @@
 	      主持人學校分機*
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :host_extend, in: 0..100000, step: 1 %>
+      <%= f.number_field :host_extend, step: 1 %>
 	  </div> 	           	
   </div>
        
@@ -211,7 +211,7 @@
 	     學費*
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :tuition, in: 0..100000, step: 1 %> NT
+      <%= f.number_field :tuition, in: 0..500000, step: 1 %> NT
 	  </div>         	
   </div>  
   
@@ -260,13 +260,13 @@
 	     預估總共學費*
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :total_tuition, in: 0..5000000, step: 1 %> NT
+      <%= f.number_field :total_tuition, in: 0..50000000, step: 1 %> NT
 	  </div> 
 	  <div class="form_title">
 	     補助款
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :grants, in: 0..5000000, step: 1 %> NT
+      <%= f.number_field :grants, in: 0..50000000, step: 1 %> NT
 	  </div>  	          	
   </div> 
   <div class="form_row">
@@ -274,7 +274,7 @@
 	     其他經費來源
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :other_funds, in: 0..5000000, step: 1 %> NT
+      <%= f.number_field :other_funds, in: 0..50000000, step: 1 %> NT
 	  </div> 	
   </div>       
   <div class="form_row">
@@ -302,14 +302,14 @@
 	  <br><span style="font-size: 90%">(學分班為15%)</span>   
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :school_expenses, in: 0..5000000, step: 1 %> NT
+      <%= f.number_field :school_expenses, in: 0..50000000, step: 1 %> NT
       (約佔經費來源  <span id="school_expenses_percent"></span>)       
 	  </div>  
 	  <div class="form_title">
 	     教務處管理費
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :academic_expenses, in: 0..5000000, step: 1 %> NT
+      <%= f.number_field :academic_expenses, in: 0..50000000, step: 1 %> NT
       (約佔經費來源  <span id="academic_expenses_percent"></span>)       
 	  </div>  	         	
   </div>         
@@ -318,14 +318,14 @@
 	      各中心管理費
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :center_expenses, in: 0..5000000, step: 1 %> NT
+      <%= f.number_field :center_expenses, in: 0..50000000, step: 1 %> NT
       (約佔經費來源  <span id="center_expenses_percent"></span>)       
 	  </div>      
 	  <div class="form_title">
 	      各學院管理費
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :college_expenses, in: 0..5000000, step: 1 %> NT
+      <%= f.number_field :college_expenses, in: 0..50000000, step: 1 %> NT
       (約佔經費來源  <span id="college_expenses_percent"></span>) 
 	  </div>     	
   </div>      
@@ -334,7 +334,7 @@
 	      各系所管理費
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :department_expenses, in: 0..5000000, step: 1 %> NT
+      <%= f.number_field :department_expenses, in: 0..50000000, step: 1 %> NT
       (約佔經費來源  <span id="department_expenses_percent"></span>) 
 	  </div>         	
   </div>   
@@ -348,7 +348,7 @@
 	    學校場地費*
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :school_venue_fee, in: 0..5000000, step: 1 %> NT
+      <%= f.number_field :school_venue_fee, in: 0..50000000, step: 1 %> NT
       (約佔經費來源  <span id="school_venue_fee_percent"></span>) 
       (約佔場地費<span id="school_venue_fee_percent_in_venue"></span>)          
 	  </div>         	
@@ -358,7 +358,7 @@
 	     各單位場地費*
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :units_venue_fee, in: 0..5000000, step: 1 %> NT 
+      <%= f.number_field :units_venue_fee, in: 0..50000000, step: 1 %> NT 
       (約佔經費來源  <span id="units_venue_fee_percent"></span>) 
       (約佔場地費<span id="units_venue_fee_percent_in_venue"></span>)           
 	  </div>  	          	
@@ -373,14 +373,14 @@
 	     人事費
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :personnel_fee, in: 0..5000000, step: 1 %> NT 
+      <%= f.number_field :personnel_fee, in: 0..50000000, step: 1 %> NT 
       (約佔經費來源  <span id="personnel_fee_percent"></span>)        
 	  </div> 
 	  <div class="form_title">
 	     業務費
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :sales_fee, in: 0..5000000, step: 1 %> NT 
+      <%= f.number_field :sales_fee, in: 0..50000000, step: 1 %> NT 
       (約佔經費來源  <span id="sales_fee_percent"></span>)        
 	  </div>  	  	          	
   </div>     
@@ -389,14 +389,14 @@
 	     差旅費
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :travel_fee, in: 0..5000000, step: 1 %> NT 
+      <%= f.number_field :travel_fee, in: 0..50000000, step: 1 %> NT 
       (約佔經費來源  <span id="travel_fee_percent"></span>)        
 	  </div>  
 	  <div class="form_title">
 	    設備費
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :facilities_fee, in: 0..5000000, step: 1 %> NT 
+      <%= f.number_field :facilities_fee, in: 0..50000000, step: 1 %> NT 
       (約佔經費來源  <span id="facilities_fee_percent"></span>)        
 	  </div>	  	          	
   </div>      
@@ -405,7 +405,7 @@
 	      鐘點費
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :hourly_fee, in: 0..5000000, step: 1 %> NT 
+      <%= f.number_field :hourly_fee, in: 0..50000000, step: 1 %> NT 
       (約佔經費來源  <span id="hourly_fee_percent"></span>)        
 	  </div>  	          	
   </div> 
