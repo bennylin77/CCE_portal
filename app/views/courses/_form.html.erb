@@ -381,14 +381,24 @@
 	}	
 	$( "#course_total_tuition" ).change(function() {
 		 $('#income_total').html( incomeTotal()+' NT' );  
+		 <%if @course.cce_class.kind == GLOBAL_VAR['kind_credit']%>
+		 	$('#course_school_expenses').val( incomeTotal()*0.15 )
+		 <%end%>
 		 expensesCal();
+		 
 	});	
 	$( "#course_grants" ).change(function() { 
 		 $('#income_total').html( incomeTotal()+' NT' ); 
+		 <%if @course.cce_class.kind == GLOBAL_VAR['kind_credit']%>
+		 	$('#course_school_expenses').val( incomeTotal()*0.15 )
+		 <%end%>		 
 		 expensesCal();
 	});	
 	$( "#course_other_funds" ).change(function() { 
 		 $('#income_total').html( incomeTotal()+' NT' ); 
+		 <%if @course.cce_class.kind == GLOBAL_VAR['kind_credit']%>
+		 	$('#course_school_expenses').val( incomeTotal()*0.15 )
+		 <%end%>		 
 		 expensesCal();
 	});	
 	
