@@ -53,10 +53,13 @@
 	  </div>
 	  <div class="form_content">
 	  <%= f.select :accounting_year, options_for_select([[(Time.now.year-1913).to_s+'上', (Time.now.year-1913).to_s+'上'], 
+	 													[(Time.now.year-1913).to_s+'暑期', (Time.now.year-1913).to_s+'暑期'],	  
 	 													[(Time.now.year-1913).to_s+'下', (Time.now.year-1913).to_s+'下'],
 	  													[(Time.now.year-1912).to_s+'上', (Time.now.year-1912).to_s+'上'],
+	  													[(Time.now.year-1912).to_s+'暑期', (Time.now.year-1912).to_s+'暑期'],
 	  													[(Time.now.year-1912).to_s+'下', (Time.now.year-1912).to_s+'下'],
 	 													[(Time.now.year-1911).to_s+'上', (Time.now.year-1911).to_s+'上'],
+	 													[(Time.now.year-1911).to_s+'暑期', (Time.now.year-1911).to_s+'暑期'],
 	  													[(Time.now.year-1911).to_s+'下', (Time.now.year-1911).to_s+'下']], @course.accounting_year)%>	
 	  </div>   	  
   </div>   
