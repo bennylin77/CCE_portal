@@ -11,8 +11,8 @@
 	        <%unless User.find(session[:user_id]).identity!=GLOBAL_VAR['identity_CCE'] %>
 	        <%= link_to '通過', {controller: :cce_classes, action: :verified, id: @cce_class.id },  class: 'function_button'%>        
 	        <%end%>
-			<%= link_to '產生會簽單', { controller: 'cce_classes', action: 'signsheet', id: @cce_class.id  }, class: 'function_button' %>  
-        <%end%>	  	 
+        <%end%>	  	
+<%= link_to '產生會簽單', { controller: 'cce_classes', action: 'signsheet', id: @cce_class.id  }, class: 'function_button' %>         
 <%= link_to '刪除', @cce_class, method: :delete, class: 'function_del_button', data: { confirm: '您確定要刪除 '+@cce_class.title+' ?' } %>	  	         
 </div>
 <section class="show_table">

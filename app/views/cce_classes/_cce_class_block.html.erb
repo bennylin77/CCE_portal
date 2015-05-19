@@ -2,7 +2,7 @@
 	<%=link_to cce_class_block, class: 'fancybox openAjax' do%>
 	<div class="content_cce_class_block" id="content_cce_class_<%=cce_class_block.id%>">				
 			<div class="cce_box_title">
-			<%= cce_class_block.title %>
+			<%= truncate( cce_class_block.title, length: 25, omission: '...') %>
 			</div>
 			<div class="cce_box_tag">
 				<div class="cce_box_tag_dim">
