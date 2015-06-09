@@ -104,7 +104,7 @@ td {
     	<%= @course.school_expenses || 0%> NT
 		(約佔經費來源  <%= ((@course.school_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)      
     </td>    
-    <th>教務處</th>
+    <th>推廣教育</th>
     <td>
       <%= @course.academic_expenses || 0%> NT	
 	  (約佔經費來源  <%= ((@course.academic_expenses.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)
