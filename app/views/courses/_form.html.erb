@@ -277,13 +277,13 @@
 	  實際培訓人次*
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :no_of_users, in: 0..500, step: 1 %>人
+      <%= f.number_field :no_of_users, in: 0..1000, step: 1 %>人
 	  </div>  
 	  <div class="form_title">
 	  實際上課(結業)人次*
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :no_of_finished_users, in: 0..500, step: 1 %>人
+      <%= f.number_field :no_of_finished_users, in: 0..1000, step: 1 %>人
 	  </div>   	        	
   </div>  
   <div class="form_row">
@@ -291,13 +291,13 @@
 	  總學分
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :total_credits, in: 0..100, step: 1 %>
+      <%= f.number_field :total_credits, in: 0..600, step: 1 %>
 	  </div>   
 	  <div class="form_title">
 	  總時數
 	  </div>
 	  <div class="form_content">
-      <%= f.number_field :total_hours, in: 0..100, step: 1 %>
+      <%= f.number_field :total_hours, in: 0..600, step: 1 %>
 	  </div> 	       	
   </div>
   <div class="form_row">
@@ -308,7 +308,7 @@
       <%= f.number_field :in_school_lecturers_quantity, in: 0..50, step: 1 %>人
 	  </div> 
 	  <div class="form_title">
-	  校內師資人數* 
+	  校外師資人數* 
 	  </div>
 	  <div class="form_content">
       <%= f.number_field :out_school_lecturers_quantity, in: 0..50, step: 1 %>人
@@ -322,7 +322,7 @@
       <%= f.number_field :in_school_lecturers_hours, in: 0..500, step: 1 %>小時
 	  </div> 
 	  <div class="form_title">
-	  校內師資時數* 
+	  校外師資時數* 
 	  </div>
 	  <div class="form_content">
       <%= f.number_field :out_school_lecturers_hours, in: 0..500, step: 1 %>小時
