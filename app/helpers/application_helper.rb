@@ -19,11 +19,11 @@ module ApplicationHelper
     when 2
       'rgb(220, 67, 133)'      
     when 3
-      'rgb(255, 197, 15)'
+      'rgb(255, 169, 40)'
     when 4
       'rgb(210, 129, 179)'     
     when 5
-      'rgb(114, 193, 149)'     
+      'rgb(114, 193, 53)'     
     when 6            
       '#198EB9'   
     end  
