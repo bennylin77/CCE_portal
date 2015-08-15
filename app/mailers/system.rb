@@ -17,5 +17,11 @@ class System < ActionMailer::Base
     @edm=hash[:edm]
     mail( to: @user.email, subject: @edm.title)    
   end   
+  def sendNewsNotification(hash={})
+    @user = hash[:user]    
+    @news = hash[:news]
+    mail( to: @user.email, subject: @edm.title)    
+  end   
+  
   
 end

@@ -40,7 +40,10 @@ class NewsController < ApplicationController
     @news = News.new(news_params)
     @news.user=User.find(session[:user_id])
     respond_to do |format|
-      if @news.save
+      if @news.save                
+        User.where(identity: GLOBAL_VAR['identity_CCE']).each do |u|
+          System.sendNewsNotification(user: u, news: @news).deliver   
+        end                     
         flash[:title]='消息公告'
         format.html { redirect_to @news, notice: '成功申請刊登最新消息' }
       else
