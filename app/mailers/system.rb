@@ -22,6 +22,9 @@ class System < ActionMailer::Base
     @news = hash[:news]
     mail( to: @user.email, subject:"國立交通大學推廣教育中心  消息公告審核通知")    
   end   
-  
-  
+  def sendClassNotification(hash={})
+    @user = hash[:user]    
+    @cce_class = hash[:cce_class]
+    mail( to: @user.email, subject:"國立交通大學推廣教育中心  課程審核通知")    
+  end   
 end

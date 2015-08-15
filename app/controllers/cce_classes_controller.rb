@@ -86,6 +86,9 @@ class CceClassesController < ApplicationController
 
     respond_to do |format|
       if @cce_class.save
+        User.where(identity: GLOBAL_VAR['identity_CCE']).each do |u|
+          System.sendClassNotification(user: u, cce_class: @cce_class).deliver   
+        end              
         flash[:title]='推廣教育課程管理'
         flash[:notice]='已申請推廣教育課程, 請等待審查'
         format.html { redirect_to controller: 'cce_classes', action: 'showManagement', id: @cce_class.id }
