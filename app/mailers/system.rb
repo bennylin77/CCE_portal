@@ -20,7 +20,7 @@ class System < ActionMailer::Base
   def sendNewsNotification(hash={})
     @user = hash[:user]    
     @news = hash[:news]
-    mail( to: @user.email, subject: @edm.title)    
+    mail( to: @user.email, subject:"國立交通大學推廣教育中心  消息公告審核通知")    
   end   
   
   
