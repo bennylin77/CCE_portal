@@ -11,7 +11,7 @@ module ApplicationHelper
   end  
   
   def boxBgColor
-    case rand(6)
+    case rand(7)
     when 0
       'rgb(94, 195, 222)'
     when 1    
@@ -21,7 +21,7 @@ module ApplicationHelper
     when 3
       'rgb(250, 207, 63)'
     when 4
-      'rgb(210, 219, 179)'     
+      'rgb(210, 129, 179)'     
     when 5
       'rgb(114, 193, 149)'     
     when 6            
