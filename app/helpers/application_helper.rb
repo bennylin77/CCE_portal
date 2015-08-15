@@ -19,7 +19,7 @@ module ApplicationHelper
     when 2
       'rgb(220, 67, 133)'      
     when 3
-      'rgb(250, 207, 63)'
+      'rgb(255, 212, 96)'
     when 4
       'rgb(210, 129, 179)'     
     when 5
