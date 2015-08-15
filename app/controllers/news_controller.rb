@@ -6,7 +6,7 @@ class NewsController < ApplicationController
   before_action only: [:edit, :update, :destroy] { |c| c.checkUser(id: @news.user.id )} 
 
   def index
-    @news = News.where('verified = true').paginate(per_page: 8, page: params[:page]).order('id DESC') 
+    @news = News.where('verified = true').paginate(per_page: 15, page: params[:page]).order('id DESC') 
   end
 
   def indexManagement
