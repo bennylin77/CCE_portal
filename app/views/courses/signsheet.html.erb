@@ -169,7 +169,7 @@ td {
     </td>    
     <th>設備費</th>
     <td>
-	  <%= @course.sales_fee || 0%> NT
+	  <%= @course.facilities_fee || 0%> NT
 	  (約佔經費來源  <%= ((@course.facilities_fee.to_f/(@course.total_tuition+@course.grants.to_i+@course.other_funds.to_i))*100).round(2) %>%)  			  	
     </td>        
   </tr> 
