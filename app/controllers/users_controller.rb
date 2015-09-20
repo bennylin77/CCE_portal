@@ -21,6 +21,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.verify_code=SecureRandom.hex(5)
+    @user.extend = 0
+    @user.personnel_code = '0'
     @user.save!
     System.sendVerification(user: @user).deliver
     flash[:title]='會員管理'
